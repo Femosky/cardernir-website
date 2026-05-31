@@ -7,7 +7,7 @@ export default function Home() {
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">
                     <Image
                         className="mx-auto block rounded-4xl"
-                        src="/cardernirlogo.png"
+                        src="/cardernirlogo.jpeg"
                         alt="Cardernir logo"
                         width={400}
                         height={400}
