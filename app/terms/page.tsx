@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Terms() {
     return (
-        <div className="flex flex-col items-center h-full bg-[#FFF9F0] mx-auto px-6 py-12">
+        <div className="flex flex-col items-center h-full mx-auto px-6 py-12">
             <h1 className="font-bold mb-6">Terms of Service</h1>
             <p className="mb-4">Coming soon</p>
         </div>

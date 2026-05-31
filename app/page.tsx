@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Home() {
     return (
-        <main className="grid h-full place-items-center px-6 text-center bg-[#FFF9F0]">
+        <main className="grid h-full place-items-center px-6 text-center">
             <div className="max-w-xl flex flex-col items-center gap-2 md:gap-4">
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">
                     <Image
