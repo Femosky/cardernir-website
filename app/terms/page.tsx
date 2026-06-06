@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { termsOfService } from '@/content/legal';
+import { LegalPage } from '@/components/LegalPage';
 
 export const metadata: Metadata = {
     title: 'Terms of Service — Cardernir',
@@ -6,10 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Terms() {
-    return (
-        <div className="flex flex-col items-center h-full mx-auto px-6 py-12">
-            <h1 className="font-bold mb-6">Terms of Service</h1>
-            <p className="mb-4">Coming soon</p>
-        </div>
-    );
+    return <LegalPage document={termsOfService} />;
 }
