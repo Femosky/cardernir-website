@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/layouts/Header';
 import { Analytics } from '@vercel/analytics/next';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -27,11 +28,13 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased`}>
             <body className="h-full flex flex-col">
-                <Header />
-                <main className="flex-1">
-                    {children}
-                    <Analytics />
-                </main>
+                <ThemeProvider>
+                    <Header />
+                    <main className="flex-1">
+                        {children}
+                        <Analytics />
+                    </main>
+                </ThemeProvider>
             </body>
         </html>
     );

@@ -26,7 +26,7 @@ export default function Home() {
                     </p>
                 </div>
 
-                <p className="text-[14px] md:text-lg font-semibold text-slate-700">Coming soon!</p>
+                <p className="text-[14px] md:text-lg font-semibold text-white">Coming soon!</p>
             </div>
         </main>
     );
