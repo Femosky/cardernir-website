@@ -5,19 +5,25 @@ export function Header() {
         <header className="w-full flex justify-center items-center py-4 px-6">
             <nav>
                 <ul className="flex gap-5 space-x-4 text-sm">
-                    <Link className="text-accent hover:text-slate-900" href="/">
+                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/">
                         Home
                     </Link>
 
                     <span className="text-slate-400">|</span>
 
-                    <Link className="text-accent hover:text-slate-900" href="/terms">
+                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/support">
+                        Support
+                    </Link>
+
+                    <span className="text-slate-400">|</span>
+
+                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/terms">
                         Terms
                     </Link>
 
                     <span className="text-slate-400">|</span>
 
-                    <Link className="text-accent hover:text-slate-900" href="/privacy">
+                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/privacy">
                         Privacy
                     </Link>
                 </ul>
