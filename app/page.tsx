@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
-    const isLive = false; // Set to true when the app is live
+    const isLive = true; // Set to true when the app is live
 
     return (
         <main className="grid h-full place-items-center px-6 text-center">
@@ -36,7 +36,7 @@ export default function Home() {
                 {isLive && (
                     <Link
                         className="relative block w-40 sm:w-44 md:w-48 lg:w-52 h-12 sm:h-14 md:h-16 lg:h-28 mx-auto"
-                        href="" // Replace with actual app store link when available
+                        href="https://apps.apple.com/app/cardernir/id6772876444"
                     >
                         <Image
                             className="rounded-4xl object-contain"
