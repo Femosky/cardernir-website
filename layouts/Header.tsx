@@ -1,32 +1,46 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export function Header() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <header className="w-full flex justify-center items-center py-4 px-6">
-            <nav>
-                <ul className="flex gap-2 md:gap-5 space-x-4 text-sm">
-                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/">
-                        Home
+        <header className="site-header">
+            <nav className="page-shell header-nav" aria-label="Main navigation">
+                <Link className="wordmark" href="/" aria-label="Cardernir home">
+                    <Image src="/cardernirlogo.jpeg" alt="" width={36} height={36} priority />
+                    Cardernir
+                </Link>
+
+                <button
+                    className="menu-toggle"
+                    type="button"
+                    aria-expanded={menuOpen}
+                    aria-controls="site-navigation"
+                    aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                    onClick={() => setMenuOpen((open) => !open)}
+                >
+                    <span />
+                    <span />
+                </button>
+
+                <div id="site-navigation" className="nav-links" data-open={menuOpen}>
+                    <Link href="/support" onClick={() => setMenuOpen(false)}>Support</Link>
+                    <Link href="/terms" onClick={() => setMenuOpen(false)}>Terms</Link>
+                    <Link href="/privacy" onClick={() => setMenuOpen(false)}>Privacy</Link>
+                    <Link
+                        className="nav-download"
+                        href="https://apps.apple.com/app/cardernir/id6772876444"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        Download
                     </Link>
-
-                    <span className="text-slate-400">|</span>
-
-                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/support">
-                        Support
-                    </Link>
-
-                    <span className="text-slate-400">|</span>
-
-                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/terms">
-                        Terms
-                    </Link>
-
-                    <span className="text-slate-400">|</span>
-
-                    <Link className="text-accent transition duration-300 hover:brightness-125" href="/privacy">
-                        Privacy
-                    </Link>
-                </ul>
+                </div>
             </nav>
         </header>
     );

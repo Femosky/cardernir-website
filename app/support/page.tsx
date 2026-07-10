@@ -32,7 +32,7 @@ export default function Support() {
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <a
                         href="mailto:support@cardernir.app?subject=Cardernir%20Support%20Request"
-                        className="inline-flex items-center justify-center rounded-full bg-button-primary px-6 py-3 text-sm font-semibold text-button-primary-foreground transition hover:opacity-90"
+                        className="support-primary-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:opacity-90"
                     >
                         Email Support
                     </a>

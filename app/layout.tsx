@@ -1,23 +1,13 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/layouts/Header';
+import { Footer } from '@/layouts/Footer';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
-    title: 'Cardernir',
-    description: 'Language-learning flashcard app',
+    title: 'Cardernir — Remember more of the language you learn',
+    description: 'A focused flashcard app with ready-made language decks and spaced repetition.',
 };
 
 export default function RootLayout({
@@ -29,15 +19,16 @@ export default function RootLayout({
         <html
             lang="en"
             suppressHydrationWarning
-            className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased`}
+            className="h-full antialiased"
         >
-            <body className="h-full min-w-screen flex flex-col">
+            <body className="min-h-full flex flex-col">
                 <ThemeProvider>
                     <Header />
-                    <main className="flex-1">
+                    <div className="flex-1">
                         {children}
                         <Analytics />
-                    </main>
+                    </div>
+                    <Footer />
                 </ThemeProvider>
             </body>
         </html>
