@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://www.cardernir.app
+Sitemap: https://www.cardernir.app/sitemap.xml
