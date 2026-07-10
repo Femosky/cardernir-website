@@ -2,8 +2,26 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Support — Cardernir',
+    title: 'Support',
     description: 'Get help and support for using Cardernir.',
+    alternates: { canonical: '/support' },
+    openGraph: {
+        type: 'website',
+        locale: 'en_CA',
+        siteName: 'Cardernir',
+        title: 'Cardernir Support',
+        description: 'Get help and support for using Cardernir.',
+        url: '/support',
+        images: [
+            {
+                url: '/hero-image-soft.png',
+                width: 1508,
+                height: 1259,
+                alt: 'Cardernir language deck and flashcard screens',
+                type: 'image/png',
+            },
+        ],
+    },
 };
 
 export default function Support() {

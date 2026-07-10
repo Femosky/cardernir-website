@@ -1,8 +1,60 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { ThemedImage } from '@/components/ThemedImage';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/cardernir/id6772876444';
+const SITE_URL = 'https://www.cardernir.app';
+const SITE_DESCRIPTION =
+    'Learn and remember vocabulary with ready-made language flashcard decks, focused reviews, and spaced repetition.';
+
+export const metadata: Metadata = {
+    alternates: {
+        canonical: '/',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_CA',
+        siteName: 'Cardernir',
+        title: 'Cardernir — Remember more of the language you learn',
+        description: SITE_DESCRIPTION,
+        url: '/',
+        images: [
+            {
+                url: '/hero-image-soft.png',
+                width: 1508,
+                height: 1259,
+                alt: 'Cardernir language deck and flashcard screens',
+                type: 'image/png',
+            },
+        ],
+    },
+};
+
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'WebSite',
+            '@id': `${SITE_URL}/#website`,
+            url: SITE_URL,
+            name: 'Cardernir',
+            description: SITE_DESCRIPTION,
+            inLanguage: 'en-CA',
+        },
+        {
+            '@type': 'SoftwareApplication',
+            '@id': `${SITE_URL}/#app`,
+            name: 'Cardernir',
+            description: SITE_DESCRIPTION,
+            applicationCategory: 'EducationalApplication',
+            operatingSystem: 'iOS',
+            url: SITE_URL,
+            downloadUrl: APP_STORE_URL,
+            image: `${SITE_URL}/hero-image-soft.png`,
+        },
+    ],
+};
 
 function AppStoreButton({ label = 'Download on the App Store' }: { label?: string }) {
     return (
@@ -21,6 +73,12 @@ function AppStoreButton({ label = 'Download on the App Store' }: { label?: strin
 export default function Home() {
     return (
         <main className="landing-page">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+                }}
+            />
             <section className="hero-section page-shell">
                 <div className="hero-copy">
                     <p className="eyebrow">Flashcards for language learners</p>
