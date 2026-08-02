@@ -63,7 +63,10 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Cardernir — Remember more of the language you learn',
         description: SITE_DESCRIPTION,
-        images: ['/hero-image-soft.png'],
+        images: {
+            url: `${SITE_URL}/cardernir-social-card.jpg`,
+            alt: 'Cardernir — Remember more of the language you learn',
+        },
     },
     robots: {
         index: true,
