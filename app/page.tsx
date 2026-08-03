@@ -21,10 +21,10 @@ export const metadata: Metadata = {
         url: '/',
         images: [
             {
-                url: '/hero-image-soft.png',
-                width: 1508,
-                height: 1259,
-                alt: 'Cardernir language deck and flashcard screens',
+                url: '/cardernir-preview.png',
+                width: 1200,
+                height: 630,
+                alt: 'Cardernir — French, remembered.',
                 type: 'image/png',
             },
         ],

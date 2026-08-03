@@ -51,10 +51,10 @@ export const metadata: Metadata = {
         description: SITE_DESCRIPTION,
         images: [
             {
-                url: '/hero-image-soft.png',
-                width: 1508,
-                height: 1259,
-                alt: 'Cardernir language deck and flashcard screens',
+                url: '/cardernir-preview.png',
+                width: 1200,
+                height: 630,
+                alt: 'Cardernir — French, remembered.',
                 type: 'image/png',
             },
         ],
@@ -64,8 +64,8 @@ export const metadata: Metadata = {
         title: 'Cardernir — Remember more of the language you learn',
         description: SITE_DESCRIPTION,
         images: {
-            url: `${SITE_URL}/cardernir-social-card.jpg`,
-            alt: 'Cardernir — Remember more of the language you learn',
+            url: `${SITE_URL}/cardernir-preview.png`,
+            alt: 'Cardernir — French, remembered.',
         },
     },
     robots: {
