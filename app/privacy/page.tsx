@@ -18,7 +18,7 @@ export const metadata: Metadata = {
                 url: '/cardernir-preview.png',
                 width: 1200,
                 height: 630,
-                alt: 'Cardernir — French, remembered.',
+                alt: 'Cardernir: French, remembered.',
                 type: 'image/png',
             },
         ],

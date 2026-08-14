@@ -1,9 +1,17 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/layouts/Header';
 import { Footer } from '@/layouts/Footer';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SiteMotion } from '@/components/SiteMotion';
+
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-inter',
+});
 
 const SITE_URL = 'https://www.cardernir.app';
 const SITE_DESCRIPTION =
@@ -12,7 +20,7 @@ const SITE_DESCRIPTION =
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'Cardernir — Language Flashcards & Spaced Repetition',
+        default: 'Cardernir | Language Flashcards & Spaced Repetition',
         template: '%s | Cardernir',
     },
     description: SITE_DESCRIPTION,
@@ -47,25 +55,25 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_CA',
         siteName: 'Cardernir',
-        title: 'Cardernir — Remember more of the language you learn',
+        title: 'Cardernir | Remember more of the language you learn',
         description: SITE_DESCRIPTION,
         images: [
             {
                 url: '/cardernir-preview.png',
                 width: 1200,
                 height: 630,
-                alt: 'Cardernir — French, remembered.',
+                alt: 'Cardernir: French, remembered.',
                 type: 'image/png',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Cardernir — Remember more of the language you learn',
+        title: 'Cardernir | Remember more of the language you learn',
         description: SITE_DESCRIPTION,
         images: {
             url: `${SITE_URL}/cardernir-preview.png`,
-            alt: 'Cardernir — French, remembered.',
+            alt: 'Cardernir: French, remembered.',
         },
     },
     robots: {
@@ -90,8 +98,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className="h-full antialiased">
+        <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
+                <SiteMotion />
                 <ThemeProvider>
                     <Header />
                     <div className="flex-1">

@@ -1,22 +1,30 @@
 import Link from 'next/link';
-import Image from 'next/image';
+
+import { ElephantMark } from '@/components/ElephantMark';
 
 export function Footer() {
+    const year = new Date().getFullYear();
+
     return (
         <footer className="site-footer">
             <div className="page-shell footer-inner">
                 <Link className="footer-brand" href="/" aria-label="Cardernir home">
-                    <Image src="/cardernirlogo.jpeg" alt="" width={28} height={28} />
-                    <span>Cardernir</span>
+                    <ElephantMark className="footer-brand-mark" />
+                    <span className="footer-brand-text">Cardernir</span>
                 </Link>
 
                 <nav className="footer-links" aria-label="Footer navigation">
                     <Link href="/support">Support</Link>
                     <Link href="/terms">Terms</Link>
                     <Link href="/privacy">Privacy</Link>
+                    <a className="footer-contact" href="mailto:support@cardernir.app">
+                        Contact
+                    </a>
                 </nav>
 
-                <p className="footer-copyright">© {new Date().getFullYear()} Cardernir</p>
+                <p className="footer-copyright">
+                    © <time dateTime={String(year)}>{year}</time> Cardernir
+                </p>
             </div>
         </footer>
     );

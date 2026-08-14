@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ThemedImage } from '@/components/ThemedImage';
+import { ElephantMark } from '@/components/ElephantMark';
+import { HeroIntro, HeroStage, MemoryCurve, Reveal } from '@/components/HomeMotion';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/cardernir/id6772876444';
 const SITE_URL = 'https://www.cardernir.app';
@@ -9,14 +10,12 @@ const SITE_DESCRIPTION =
     'Learn and remember vocabulary with ready-made language flashcard decks, focused reviews, and spaced repetition.';
 
 export const metadata: Metadata = {
-    alternates: {
-        canonical: '/',
-    },
+    alternates: { canonical: '/' },
     openGraph: {
         type: 'website',
         locale: 'en_CA',
         siteName: 'Cardernir',
-        title: 'Cardernir — Remember more of the language you learn',
+        title: 'Cardernir | Remember more of the language you learn',
         description: SITE_DESCRIPTION,
         url: '/',
         images: [
@@ -24,7 +23,7 @@ export const metadata: Metadata = {
                 url: '/cardernir-preview.png',
                 width: 1200,
                 height: 630,
-                alt: 'Cardernir — French, remembered.',
+                alt: 'Cardernir: French, remembered.',
                 type: 'image/png',
             },
         ],
@@ -56,7 +55,70 @@ const structuredData = {
     ],
 };
 
-function AppStoreButton({ label = 'Download on the App Store' }: { label?: string }) {
+const proofPoints = [
+    { value: '3,850', label: 'curated French cards' },
+    { value: '5', label: 'focused French packs' },
+    { value: 'FSRS', label: 'timed reviews' },
+];
+
+const fsrsSteps = [
+    { title: 'You rate recall', description: 'Again, Hard, Good, or Easy.' },
+    { title: 'FSRS updates the timing', description: 'The interval adapts to that card and your history.' },
+    { title: 'The card returns when useful', description: 'Difficult memories get attention sooner.' },
+];
+
+const productSteps = [
+    {
+        title: 'Choose a French goal',
+        description:
+            'Start with a ready-made pack for core vocabulary, conversation, verbs, travel, or exam preparation.',
+        mobileDescription: 'Start with a ready-made French pack.',
+        image: '/cardernir-choose-goal.jpeg',
+        alt: 'Choosing the French Core vocabulary pack in Cardernir',
+    },
+    {
+        title: 'Learn in focused sessions',
+        description: 'Short decks keep attention on one useful French word or phrase at a time.',
+        mobileDescription: 'Keep attention on one useful word or phrase.',
+        image: '/cardernir-focused-sessions.jpeg',
+        alt: 'Learning a French phrase in a focused Cardernir review session',
+    },
+    {
+        title: 'Review only what is due',
+        description: 'FSRS brings difficult cards back sooner and gives stronger memories more room.',
+        mobileDescription: 'FSRS brings difficult cards back sooner.',
+        image: '/cardernir-review-due.jpeg',
+        alt: 'Reviewing a due French vocabulary card in Cardernir',
+    },
+];
+
+const packs = [
+    { name: 'French Core', description: 'Essential words for a solid foundation', count: '1,000 cards' },
+    { name: 'Everyday French Phrases', description: 'Practical language for real conversations', count: '550 cards' },
+    { name: 'French Verb Mastery', description: 'High-value verbs, forms, and usage', count: '800 cards' },
+    { name: 'French for Travel', description: 'Useful vocabulary for life on the go', count: '700 cards' },
+    { name: 'TEF / TCF Canada Prep', description: 'Focused vocabulary for exam preparation', count: '800 cards' },
+];
+
+const calmPrinciples = [
+    {
+        title: 'No streak pressure',
+        description: 'Missing a day is not a failure. Your cards will still be there.',
+        mobileDescription: 'Missing a day is not a failure.',
+    },
+    {
+        title: 'Progress you can read',
+        description: 'See what is new, learning, and due without decoding a dashboard.',
+        mobileDescription: 'See what is new, learning, and due.',
+    },
+    {
+        title: 'Reminders you control',
+        description: 'Choose when Cardernir nudges you, or keep the experience quiet.',
+        mobileDescription: 'Choose when Cardernir nudges you.',
+    },
+];
+
+function AppStoreButton({ label = 'Download Cardernir on the App Store' }: { label?: string }) {
     return (
         <Link
             className="app-store-button"
@@ -75,127 +137,184 @@ export default function Home() {
         <main className="landing-page">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
-                }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
             />
-            <section className="hero-section page-shell">
-                <div className="hero-copy">
-                    <p className="eyebrow">Flashcards for language learners</p>
-                    <h1>Remember more of the language you learn.</h1>
-                    <p className="hero-description">
-                        Cardernir turns vocabulary into a clear daily practice, with ready-made decks, focused reviews,
-                        and spaced repetition that brings each card back at the right time.
-                    </p>
 
-                    <div className="hero-actions">
-                        <AppStoreButton />
-                        <span>Available for iPhone</span>
+            <section className="hero-section" aria-labelledby="hero-title">
+                <div className="page-shell hero-shell">
+                    <HeroIntro />
+                    <HeroStage />
+                </div>
+            </section>
+
+            <Reveal>
+                <section className="proof-strip" aria-label="Cardernir in numbers">
+                    <div className="proof-grid">
+                        {proofPoints.map((point) => (
+                            <div className="proof-item" key={point.label}>
+                                <strong>{point.value}</strong>
+                                <span>{point.label}</span>
+                            </div>
+                        ))}
                     </div>
-                </div>
+                </section>
+            </Reveal>
 
-                <div className="hero-visual">
-                    <ThemedImage
-                        lightSrc="/hero-image-soft.png"
-                        darkSrc="/hero-image-soft-dark.png"
-                        alt="Cardernir language deck and flashcard screens"
-                        width={1508}
-                        height={1259}
-                        priority
-                        sizes="(max-width: 700px) 82vw, 600px"
-                    />
-                </div>
-            </section>
+            <Reveal>
+                <section id="spaced-repetition" className="fsrs-section dark-section" aria-labelledby="fsrs-heading">
+                    <div className="page-shell fsrs-layout">
+                        <div className="fsrs-copy">
+                            <p className="section-kicker section-kicker--light">Spaced repetition, powered by FSRS</p>
+                            <h2 id="fsrs-heading">The right card, close to the right moment.</h2>
+                            <p className="section-description">
+                                Every answer updates the card’s memory state. FSRS considers difficulty, stability, and
+                                retrievability when choosing the next interval, so difficult memories return sooner and
+                                stronger memories receive longer intervals.
+                            </p>
 
-            <section className="value-strip" aria-label="Cardernir benefits">
-                <div className="page-shell value-showcase">
-                    <div className="value-heading">
-                        <p className="eyebrow">Inside Cardernir</p>
-                        <h2>From a deck to a word remembered.</h2>
+                            <ol className="editorial-steps fsrs-steps">
+                                {fsrsSteps.map((step, index) => (
+                                    <li key={step.title}>
+                                        <span className="step-number">{String(index + 1).padStart(2, '0')}</span>
+                                        <div>
+                                            <h3>{step.title}</h3>
+                                            <p>{step.description}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ol>
+                        </div>
+                        <MemoryCurve />
                     </div>
+                </section>
+            </Reveal>
 
-                    <div className="walkthrough-grid">
-                        <figure>
-                            <ThemedImage
-                                lightSrc="/cardernir-decks.webp"
-                                darkSrc="/cardernir-decks-dark.webp"
-                                alt="Choosing a language deck in Cardernir"
-                                width={1400}
-                                height={1520}
-                                sizes="(max-width: 700px) calc(100vw - 32px), 31vw"
-                            />
-                            <figcaption>Choose a deck</figcaption>
-                        </figure>
+            <Reveal>
+                <section id="how-it-works" className="story-section" aria-labelledby="story-heading">
+                    <div className="page-shell">
+                        <div className="story-heading">
+                            <div>
+                                <p className="section-kicker">A simple daily loop</p>
+                                <h2 id="story-heading">Choose. Learn. Let timing do the organising.</h2>
+                            </div>
+                            <p>
+                                Everything is ready when you open the app. There is no blank-deck setup between you and
+                                your first French card.
+                            </p>
+                        </div>
 
-                        <figure>
-                            <ThemedImage
-                                lightSrc="/cardernir-study.webp"
-                                darkSrc="/cardernir-study-dark.webp"
-                                alt="Studying a language flashcard in Cardernir"
-                                width={1400}
-                                height={1520}
-                                sizes="(max-width: 700px) calc(100vw - 32px), 31vw"
-                            />
-                            <figcaption>Study a card</figcaption>
-                        </figure>
-
-                        <figure>
-                            <ThemedImage
-                                lightSrc="/cardernir-review.webp"
-                                darkSrc="/cardernir-review-dark.webp"
-                                alt="Reviewing a due language card in Cardernir"
-                                width={1400}
-                                height={1520}
-                                sizes="(max-width: 700px) calc(100vw - 32px), 31vw"
-                            />
-                            <figcaption>Review when due</figcaption>
-                        </figure>
+                        <div className="story-grid">
+                            {productSteps.map((step, index) => (
+                                <article className="story-step" key={step.title}>
+                                    <span className="step-number">{String(index + 1).padStart(2, '0')}</span>
+                                    <h3>{step.title}</h3>
+                                    <p className="desktop-copy">{step.description}</p>
+                                    <p className="mobile-copy">{step.mobileDescription}</p>
+                                    <figure className="story-media">
+                                        <Image
+                                            src={step.image}
+                                            alt={step.alt}
+                                            width={360}
+                                            height={391}
+                                            sizes="(max-width: 900px) calc(100vw - 36px), 28vw"
+                                        />
+                                    </figure>
+                                </article>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </Reveal>
 
-            <section className="feature-section page-shell">
-                <div className="feature-image">
-                    <ThemedImage
-                        lightSrc="/cardernir-study-closeup.png"
-                        darkSrc="/cardernir-study-closeup-dark.png"
-                        alt="Studying a language flashcard in Cardernir"
-                        fill
-                        sizes="(max-width: 760px) 92vw, 48vw"
-                    />
-                </div>
+            <Reveal>
+                <section id="packs" className="packs-section" aria-labelledby="packs-heading">
+                    <div className="page-shell packs-layout">
+                        <div className="packs-intro">
+                            <p className="section-kicker">Five focused packs</p>
+                            <h2 id="packs-heading">Start with a goal, not an empty screen.</h2>
+                            <p className="section-description">
+                                Each pack includes small practice decks and a complete FSRS spaced-repetition deck.
+                            </p>
+                            <p className="pack-total">
+                                <strong>3,850</strong> curated French-to-English cards
+                            </p>
+                            <p className="pack-note pack-note--desktop">
+                                Preview selected decks free. Individual packs and Premium are available in the app.
+                            </p>
+                        </div>
 
-                <div className="feature-copy">
-                    <p className="eyebrow">Built for consistency</p>
-                    <h2>A calmer way to build vocabulary.</h2>
-                    <p>
-                        No streak pressure. No crowded lesson map. Open Cardernir, review what is due, and get back to
-                        your day.
-                    </p>
-                    <ul>
-                        <li>
-                            <span aria-hidden="true">✓</span> Focused, one-card-at-a-time sessions
-                        </li>
-                        <li>
-                            <span aria-hidden="true">✓</span> Progress that is easy to understand
-                        </li>
-                        <li>
-                            <span aria-hidden="true">✓</span> Decks designed around real vocabulary
-                        </li>
-                    </ul>
-                </div>
-            </section>
+                        <ol className="pack-list">
+                            {packs.map((pack, index) => (
+                                <li key={pack.name}>
+                                    <span className="step-number">{String(index + 1).padStart(2, '0')}</span>
+                                    <div className="pack-copy">
+                                        <h3>{pack.name}</h3>
+                                        <p>{pack.description}</p>
+                                    </div>
+                                    <strong>{pack.count}</strong>
+                                </li>
+                            ))}
+                        </ol>
+                        <p className="pack-note pack-note--mobile">
+                            Preview selected decks free. Individual packs and Premium are available in the app.
+                        </p>
+                    </div>
+                </section>
+            </Reveal>
 
-            <section className="closing-section page-shell">
-                <p className="eyebrow">Your next word is waiting</p>
-                <h2>
-                    Learn a little.
-                    <br />
-                    Remember a lot.
-                </h2>
-                <p>Download Cardernir and make vocabulary practice part of your day.</p>
-                <AppStoreButton label="Get Cardernir on the App Store" />
-            </section>
+            <Reveal>
+                <section id="why-cardernir" className="calm-section dark-section" aria-labelledby="calm-heading">
+                    <div className="page-shell calm-shell">
+                        <div className="calm-intro">
+                            <p className="section-kicker section-kicker--light">A calmer study rhythm</p>
+                            <h2 id="calm-heading">Built for consistency, not guilt.</h2>
+                            <p>
+                                Open the app, review what is due, and get back to your day. Cardernir is designed to
+                                help you return without making you feel behind.
+                            </p>
+                        </div>
+
+                        <ol className="editorial-steps calm-steps">
+                            {calmPrinciples.map((principle, index) => (
+                                <li key={principle.title}>
+                                    <span className="step-number">{String(index + 1).padStart(2, '0')}</span>
+                                    <div>
+                                        <h3>{principle.title}</h3>
+                                        <p className="desktop-copy">{principle.description}</p>
+                                        <p className="mobile-copy">{principle.mobileDescription}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
+
+                        <div className="maker-note">
+                            <ElephantMark tone="onAccent" className="maker-mark" />
+                            <div>
+                                <p className="section-kicker section-kicker--light">Built independently in Canada</p>
+                                <h3>A small app, built with care.</h3>
+                            </div>
+                            <p>
+                                Cardernir is made by one developer who wanted a calmer way to keep French vocabulary
+                                from disappearing between study sessions.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </Reveal>
+
+            <Reveal>
+                <section className="closing-section" aria-labelledby="closing-heading">
+                    <ElephantMark tone="onAccent" className="closing-mark" />
+                    <p className="section-kicker section-kicker--on-accent">Your next French word is waiting</p>
+                    <h2 id="closing-heading">
+                        Learn a little.
+                        <br />
+                        Remember a lot.
+                    </h2>
+                    <p>Make French vocabulary practice part of your day.</p>
+                    <AppStoreButton label="Get Cardernir on the App Store" />
+                </section>
+            </Reveal>
         </main>
     );
 }
