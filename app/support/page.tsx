@@ -1,28 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/siteMetadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
     title: 'Support',
+    socialTitle: 'Cardernir Support',
     description: 'Get help and support for using Cardernir.',
-    alternates: { canonical: '/support' },
-    openGraph: {
-        type: 'website',
-        locale: 'en_CA',
-        siteName: 'Cardernir',
-        title: 'Cardernir Support',
-        description: 'Get help and support for using Cardernir.',
-        url: '/support',
-        images: [
-            {
-                url: '/cardernir-preview.png',
-                width: 1200,
-                height: 630,
-                alt: 'Cardernir: French, remembered.',
-                type: 'image/png',
-            },
-        ],
-    },
-};
+    path: '/support',
+});
 
 export default function Support() {
     return (

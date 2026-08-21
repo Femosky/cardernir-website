@@ -1,56 +1,75 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import { ElephantMark } from '@/components/ElephantMark';
 import { HeroIntro, HeroStage, MemoryCurve, Reveal } from '@/components/HomeMotion';
-
-const APP_STORE_URL = 'https://apps.apple.com/app/cardernir/id6772876444';
-const SITE_URL = 'https://www.cardernir.app';
-const SITE_DESCRIPTION =
-    'Learn and remember vocabulary with ready-made language flashcard decks, focused reviews, and spaced repetition.';
-
-export const metadata: Metadata = {
-    alternates: { canonical: '/' },
-    openGraph: {
-        type: 'website',
-        locale: 'en_CA',
-        siteName: 'Cardernir',
-        title: 'Cardernir | Remember more of the language you learn',
-        description: SITE_DESCRIPTION,
-        url: '/',
-        images: [
-            {
-                url: '/cardernir-preview.png',
-                width: 1200,
-                height: 630,
-                alt: 'Cardernir: French, remembered.',
-                type: 'image/png',
-            },
-        ],
-    },
-};
+import {
+    APP_STORE_URL,
+    BRAND_IMAGE_URL,
+    SITE_DESCRIPTION,
+    SITE_NAME,
+    SITE_TITLE,
+    SITE_URL,
+    SOCIAL_IMAGE_URL,
+} from '@/lib/siteMetadata';
 
 const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
         {
+            '@type': 'ImageObject',
+            '@id': `${SITE_URL}/#brand-image`,
+            url: BRAND_IMAGE_URL,
+            contentUrl: BRAND_IMAGE_URL,
+            width: 1024,
+            height: 1024,
+            caption: 'Cardernir elephant logo',
+        },
+        {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: { '@id': `${SITE_URL}/#brand-image` },
+            image: { '@id': `${SITE_URL}/#brand-image` },
+            email: 'support@cardernir.app',
+        },
+        {
             '@type': 'WebSite',
             '@id': `${SITE_URL}/#website`,
             url: SITE_URL,
-            name: 'Cardernir',
+            name: SITE_NAME,
+            alternateName: ['Cardernir App', 'cardernir.app'],
             description: SITE_DESCRIPTION,
+            inLanguage: 'en-CA',
+            publisher: { '@id': `${SITE_URL}/#organization` },
+        },
+        {
+            '@type': 'WebPage',
+            '@id': `${SITE_URL}/#webpage`,
+            url: SITE_URL,
+            name: SITE_TITLE,
+            description: SITE_DESCRIPTION,
+            isPartOf: { '@id': `${SITE_URL}/#website` },
+            about: { '@id': `${SITE_URL}/#app` },
+            primaryImageOfPage: { '@id': `${SITE_URL}/#brand-image` },
             inLanguage: 'en-CA',
         },
         {
-            '@type': 'SoftwareApplication',
+            '@type': ['SoftwareApplication', 'MobileApplication'],
             '@id': `${SITE_URL}/#app`,
-            name: 'Cardernir',
+            name: SITE_NAME,
             description: SITE_DESCRIPTION,
             applicationCategory: 'EducationalApplication',
             operatingSystem: 'iOS',
             url: SITE_URL,
             downloadUrl: APP_STORE_URL,
-            image: `${SITE_URL}/hero-image-soft.png`,
+            installUrl: APP_STORE_URL,
+            sameAs: [APP_STORE_URL],
+            image: { '@id': `${SITE_URL}/#brand-image` },
+            screenshot: SOCIAL_IMAGE_URL,
+            publisher: { '@id': `${SITE_URL}/#organization` },
+            mainEntityOfPage: { '@id': `${SITE_URL}/#webpage` },
+            inLanguage: 'en-CA',
         },
     ],
 };

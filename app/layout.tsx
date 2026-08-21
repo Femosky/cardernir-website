@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/layouts/Header';
@@ -6,6 +6,16 @@ import { Footer } from '@/layouts/Footer';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SiteMotion } from '@/components/SiteMotion';
+import {
+    APP_STORE_ID,
+    SITE_DESCRIPTION,
+    SITE_NAME,
+    SITE_TITLE,
+    SITE_URL,
+    SOCIAL_TITLE,
+    sharedOpenGraphImages,
+    sharedTwitterImage,
+} from '@/lib/siteMetadata';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -13,18 +23,17 @@ const inter = Inter({
     variable: '--font-inter',
 });
 
-const SITE_URL = 'https://www.cardernir.app';
-const SITE_DESCRIPTION =
-    'Learn and remember vocabulary with ready-made language flashcard decks, focused reviews, and spaced repetition.';
-
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'Cardernir | Language Flashcards & Spaced Repetition',
+        default: SITE_TITLE,
         template: '%s | Cardernir',
     },
     description: SITE_DESCRIPTION,
-    applicationName: 'Cardernir',
+    applicationName: SITE_NAME,
+    referrer: 'strict-origin-when-cross-origin',
+    manifest: '/manifest.webmanifest',
+    alternates: { canonical: '/' },
     keywords: [
         'french flashcards',
         'learn french',
@@ -47,34 +56,24 @@ export const metadata: Metadata = {
         'learn vocabulary',
         'iPhone flashcard app',
     ],
-    authors: [{ name: 'Cardernir', url: SITE_URL }],
-    creator: 'Cardernir',
-    publisher: 'Cardernir',
+    authors: [{ name: SITE_NAME, url: SITE_URL }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
     category: 'education',
     openGraph: {
         type: 'website',
         locale: 'en_CA',
-        siteName: 'Cardernir',
-        title: 'Cardernir | Remember more of the language you learn',
+        siteName: SITE_NAME,
+        title: SOCIAL_TITLE,
         description: SITE_DESCRIPTION,
-        images: [
-            {
-                url: '/cardernir-preview.png',
-                width: 1200,
-                height: 630,
-                alt: 'Cardernir: French, remembered.',
-                type: 'image/png',
-            },
-        ],
+        url: '/',
+        images: sharedOpenGraphImages,
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Cardernir | Remember more of the language you learn',
+        title: SOCIAL_TITLE,
         description: SITE_DESCRIPTION,
-        images: {
-            url: `${SITE_URL}/cardernir-preview.png`,
-            alt: 'Cardernir: French, remembered.',
-        },
+        images: [sharedTwitterImage],
     },
     robots: {
         index: true,
@@ -88,8 +87,27 @@ export const metadata: Metadata = {
         },
     },
     itunes: {
-        appId: '6772876444',
+        appId: APP_STORE_ID,
     },
+    pinterest: { richPin: true },
+    appleWebApp: {
+        capable: true,
+        title: SITE_NAME,
+        statusBarStyle: 'default',
+    },
+    formatDetection: {
+        address: false,
+        email: false,
+        telephone: false,
+    },
+};
+
+export const viewport: Viewport = {
+    colorScheme: 'light dark',
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: '#f5f7fb' },
+        { media: '(prefers-color-scheme: dark)', color: '#111827' },
+    ],
 };
 
 export default function RootLayout({
@@ -98,7 +116,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
+        <html lang="en-CA" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
                 <SiteMotion />
                 <ThemeProvider>
