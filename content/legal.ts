@@ -21,8 +21,8 @@ export type LegalDocument = {
 
 export const privacyPolicy: LegalDocument = {
     title: 'Privacy Policy',
-    lastUpdated: 'RELEASE_DATE',
-    effectiveDate: 'RELEASE_DATE',
+    lastUpdated: 'September 17, 2026',
+    effectiveDate: 'September 17, 2026',
     intro: [
         'This Privacy Policy explains how Cardernir collects, uses, and protects information when you use the Cardernir mobile app and website.',
         'Cardernir is operated by Olufemi Ojeyemi, a sole proprietor registered in Canada.',
@@ -225,8 +225,8 @@ export const privacyPolicy: LegalDocument = {
 
 export const termsOfService: LegalDocument = {
     title: 'Terms of Service',
-    lastUpdated: 'RELEASE_DATE',
-    effectiveDate: 'RELEASE_DATE',
+    lastUpdated: 'September 17, 2026',
+    effectiveDate: 'September 17, 2026',
     intro: [
         'These Terms of Service govern your access to and use of Cardernir, including the Cardernir mobile app, website, content, packs, subscriptions, and related services.',
         'Cardernir is operated by Olufemi Ojeyemi, a sole proprietor registered in Canada.',
