@@ -21,12 +21,12 @@ export type LegalDocument = {
 
 export const privacyPolicy: LegalDocument = {
     title: 'Privacy Policy',
-    lastUpdated: 'June 6, 2026',
-    effectiveDate: 'June 6, 2026',
+    lastUpdated: 'RELEASE_DATE',
+    effectiveDate: 'RELEASE_DATE',
     intro: [
         'This Privacy Policy explains how Cardernir collects, uses, and protects information when you use the Cardernir mobile app and website.',
         'Cardernir is operated by Olufemi Ojeyemi, a sole proprietor registered in Canada.',
-        'Cardernir is designed to work without requiring users to create an account. In this version, learning progress is stored locally on your device, and purchases are managed through your Apple ID using Apple’s in-app purchase system.',
+        'Cardernir is designed to work without requiring users to create an account. In this version, learning progress is stored locally on your device, and purchases are managed through your Apple ID using Apple’s in-app purchase system. Cardernir also uses notifications to remind you to practise. Some notifications are scheduled on your device, and some are sent from our servers, which requires storing a notification token for your device.',
     ],
     sections: [
         {
@@ -42,6 +42,9 @@ export const privacyPolicy: LegalDocument = {
                 'App content requests, such as requests to download available packs, decks, images, or other learning content from Cardernir’s backend.',
                 'Advertising-related information processed by Google AdMob, which may include device identifiers, approximate location, ad interactions, diagnostics, and other information used to provide, limit, measure, and improve ads.',
                 'Support information you choose to send us, such as your email address and the contents of your message if you contact support.',
+                'Notification information, if you allow notifications: a notification token provided by Apple for your device, a randomly generated installation identifier, your device’s time zone and language, the languages you are studying, your notification preferences, and whether you have an active subscription. This lets us send reminders at a sensible time of day, in the right language, and only to people who want them.',
+                'Practice activity: which days you practised, when you were last active, and a practice streak calculated from those days. This is recorded on your device. A short summary (the last day you practised, the day you were last active, and your current streak) is sent with the notification information above so we don’t send a reminder on a day you have already studied.',
+                'Onboarding and app analytics: anonymous information about your first-run experience and key in-app events, such as the options you choose during setup, how you heard about Cardernir if you tell us, and events like viewing the subscription screen. These are linked to a randomly generated identifier, not to your name or email.',
             ],
         },
         {
@@ -54,17 +57,41 @@ export const privacyPolicy: LegalDocument = {
             ],
         },
         {
-            id: 'purchases',
-            title: '3. Purchases and Subscriptions',
+            id: 'notifications',
+            title: '3. Notifications',
             paragraphs: [
-                'Cardernir offers in-app purchases, including non-consumable purchases for individual content packs and auto-renewable subscriptions such as monthly or yearly plans. Some subscriptions may include promotional trials or introductory offers where available.',
+                'Notifications are optional. Cardernir asks for your permission first, and you can turn them off at any time in the app under Settings → Notifications, or in your device’s iOS settings.',
+                'Cardernir uses notifications in three ways:',
+            ],
+            bullets: [
+                'Practice reminders at the time you choose, including a note when cards are ready for review. These are not sent on days you have already practised.',
+                'Reminders after a break, if you haven’t studied for a while.',
+                'News about new content and offers. These are only sent if you specifically turn them on. They are off by default.',
+            ],
+            subsections: [
+                {
+                    id: 'notifications-delivery',
+                    title: 'How notifications are delivered',
+                    paragraphs: [
+                        'Some notifications are scheduled entirely on your device. Others are sent from our servers through Apple’s Push Notification service, which is why we store the notification information described above. You can stop server-sent notifications from the app under Settings → Notifications while keeping the reminders scheduled on your device, or turn off all notifications in your device settings.',
+                        'We keep a record of the notifications our servers send you, so we don’t send the same message twice or send too often.',
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'purchases',
+            title: '4. Purchases and Subscriptions',
+            paragraphs: [
+                'Cardernir offers auto-renewable subscriptions, such as monthly or yearly plans, which unlock premium content. Some subscriptions may include promotional trials or introductory offers where available.',
+                'Individual content packs were previously sold as one-time purchases. They are no longer offered for sale. If you bought a pack before this change, it remains available to you and can still be restored through Apple’s purchase systems.',
                 'Purchases are processed by Apple through the App Store. Cardernir does not receive or store your full payment card details.',
                 'Your purchase and subscription status is tied to your Apple ID and is managed through Apple’s in-app purchase system. You can manage or cancel subscriptions through your Apple ID or App Store account settings.',
             ],
         },
         {
             id: 'how-we-use-information',
-            title: '4. How We Use Information',
+            title: '5. How We Use Information',
             paragraphs: ['We use information only as needed to operate, maintain, and improve Cardernir.'],
             bullets: [
                 'To provide flashcard learning features and spaced repetition functionality.',
@@ -77,21 +104,21 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'third-party-services',
-            title: '5. Third-Party Services',
+            title: '6. Third-Party Services',
             paragraphs: [
                 'Cardernir uses third-party services to provide core app functionality. These services may process information according to their own privacy policies and technical requirements.',
             ],
             bullets: [
-                'Apple: used for App Store distribution, in-app purchases, subscriptions, promotional offers, purchase restoration, and related purchase management.',
+                'Apple: used for App Store distribution, in-app purchases, subscriptions, promotional offers, purchase restoration, related purchase management, and the Apple Push Notification service, which delivers notifications sent from our servers to your device.',
                 'Google AdMob: used to display and measure ads. Google may process advertising-related data, including identifiers and ad interaction data, depending on your device settings, region, consent choices, and applicable law.',
-                'Supabase: used to host and deliver Cardernir content such as packs, decks, card data, and related app content.',
+                'Supabase: used to host and deliver Cardernir content such as packs, decks, card data and related app content, and to store the notification and analytics information described in this policy.',
                 'Kingfisher: used in the app to load and cache images efficiently.',
                 'FSRS: used to support spaced repetition scheduling.',
             ],
         },
         {
             id: 'advertising',
-            title: '6. Advertising',
+            title: '7. Advertising',
             paragraphs: [
                 'Cardernir may show ads through Google AdMob. Ads may be personalized or non-personalized depending on your location, consent choices, Apple privacy settings, and Google’s advertising systems.',
                 'Where required by law, you may be asked to provide consent before certain advertising technologies or personalized advertising features are used.',
@@ -100,15 +127,15 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'analytics-and-diagnostics',
-            title: '7. Analytics and Diagnostics',
+            title: '8. Analytics and Diagnostics',
             paragraphs: [
-                'Cardernir does not currently operate a separate user account analytics system. However, Apple, Google AdMob, Supabase, or other integrated services may process diagnostic, performance, crash, usage, or technical information as part of providing their services.',
-                'If Cardernir adds additional analytics or crash reporting tools in the future, this Privacy Policy may be updated to describe those tools and how they are used.',
+                'Cardernir records anonymous information about setup and key in-app events, such as which options you choose during onboarding, how you heard about Cardernir if you tell us, and events such as opening the subscription screen or the notification settings. This information is linked to a randomly generated identifier, not to your name, email, or Apple ID, and is used to understand how the app is used and to improve it.',
+                'Apple, Google AdMob, Supabase, and other integrated services may also process diagnostic, performance, crash, usage, or technical information as part of providing their services.',
             ],
         },
         {
             id: 'audio-and-images',
-            title: '8. Images, Audio, and Future Content Features',
+            title: '9. Images, Audio, and Future Content Features',
             paragraphs: [
                 'Cardernir may display images or other media associated with cards when available. These assets may be loaded from Cardernir’s backend or cached on your device.',
                 'Cardernir may add audio support in a future update, including text-to-speech or audio files loaded from a storage service. If this changes how information is collected or processed, this Privacy Policy may be updated.',
@@ -116,7 +143,7 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'data-sharing',
-            title: '9. How Information Is Shared',
+            title: '10. How Information Is Shared',
             paragraphs: [
                 'We do not sell your personal information.',
                 'We may share or make information available only in the following limited situations:',
@@ -130,34 +157,37 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'data-retention',
-            title: '10. Data Retention',
+            title: '11. Data Retention',
             paragraphs: [
                 'Local progress remains on your device until you delete it, uninstall the app, reset your device, or otherwise remove the data.',
                 'Support emails may be retained for as long as needed to respond to your request, maintain records, resolve disputes, or comply with legal obligations.',
                 'Third-party services may retain information according to their own privacy policies and retention practices.',
+                'Notification information is kept while notifications are enabled for your device. If your notification token stops working, for example because you uninstalled the app or turned notifications off, we mark it as inactive and stop sending to it. We may delete device records that have been inactive for an extended period. Records of notifications we sent, and onboarding and app analytics, are kept in a form that is not linked to your name or email.',
             ],
         },
         {
             id: 'your-choices',
-            title: '11. Your Choices',
+            title: '12. Your Choices',
             bullets: [
                 'You can delete local Cardernir data by deleting the app or using any in-app reset or delete options that may be available.',
                 'You can manage subscriptions through your Apple ID or App Store account settings.',
                 'You can restore eligible purchases in the app where purchase restoration is available.',
                 'You can manage Apple advertising and tracking permissions through your device settings.',
                 'You can contact us to ask privacy-related questions or request assistance.',
+                'You can turn notifications on or off, and choose which kinds you receive, under Settings → Notifications in the app, or in your device’s iOS settings.',
+                'You can ask us to delete the notification and analytics records associated with your device by contacting us; include the approximate date and device you used so we can locate them.',
             ],
         },
         {
             id: 'children',
-            title: '12. Children’s Privacy',
+            title: '13. Children’s Privacy',
             paragraphs: [
                 'Cardernir is not directed to children under the age of 13, and we do not knowingly collect personal information from children under 13. If you believe a child has provided personal information to us, please contact us so we can take appropriate action.',
             ],
         },
         {
             id: 'international-users',
-            title: '13. International Users',
+            title: '14. International Users',
             paragraphs: [
                 'Cardernir is operated from Canada and may be available in multiple countries and regions. By using Cardernir, you understand that information may be processed in Canada or in other countries where our service providers operate.',
                 'Privacy laws may vary by location. Where required, we will handle information according to applicable privacy requirements.',
@@ -165,14 +195,14 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'security',
-            title: '14. Security',
+            title: '15. Security',
             paragraphs: [
                 'We use reasonable technical and organizational measures to protect information associated with Cardernir. However, no app, website, network, or storage system can be guaranteed to be completely secure.',
             ],
         },
         {
             id: 'changes',
-            title: '15. Changes to This Privacy Policy',
+            title: '16. Changes to This Privacy Policy',
             paragraphs: [
                 'We may update this Privacy Policy from time to time. When we make changes, we will update the “Last Updated” date above.',
                 'Changes are effective when posted on this page unless a different effective date is stated. Your continued use of Cardernir after changes are posted means you accept the updated Privacy Policy.',
@@ -180,7 +210,7 @@ export const privacyPolicy: LegalDocument = {
         },
         {
             id: 'contact',
-            title: '16. Contact Us',
+            title: '17. Contact Us',
             paragraphs: [
                 'If you have questions about this Privacy Policy or Cardernir’s privacy practices, contact us at support@cardernir.app.',
             ],
@@ -195,8 +225,8 @@ export const privacyPolicy: LegalDocument = {
 
 export const termsOfService: LegalDocument = {
     title: 'Terms of Service',
-    lastUpdated: 'June 6, 2026',
-    effectiveDate: 'June 6, 2026',
+    lastUpdated: 'RELEASE_DATE',
+    effectiveDate: 'RELEASE_DATE',
     intro: [
         'These Terms of Service govern your access to and use of Cardernir, including the Cardernir mobile app, website, content, packs, subscriptions, and related services.',
         'Cardernir is operated by Olufemi Ojeyemi, a sole proprietor registered in Canada.',
@@ -218,6 +248,7 @@ export const termsOfService: LegalDocument = {
                 'Cardernir does not currently require users to create a Cardernir account.',
                 'Purchases and subscriptions are managed through your Apple ID using Apple’s in-app purchase system. Learning progress is stored locally on your device in this version.',
                 'Because progress is stored locally, Cardernir may not be able to recover your progress if you delete the app, delete app data, change devices, or lose access to your device.',
+                'Cardernir generates a random identifier for your installation so features such as notifications can work without an account.',
             ],
         },
         {
@@ -232,8 +263,8 @@ export const termsOfService: LegalDocument = {
             id: 'purchases',
             title: '4. Purchases, Packs, and Subscriptions',
             paragraphs: [
-                'Cardernir may offer free content, paid content packs, auto-renewable subscriptions, promotional trials, introductory offers, or other paid features.',
-                'Individual pack purchases are non-consumable purchases that unlock access to the relevant pack, subject to availability and these Terms.',
+                'Cardernir may offer free content, auto-renewable subscriptions, promotional trials, introductory offers, or other paid features.',
+                'Individual content packs were previously offered as one-time purchases. They are no longer sold. If you purchased a pack before this change, that purchase remains valid and you keep access to that pack, subject to availability and these Terms. Premium content added after this change is available through a subscription.',
                 'Subscriptions may provide access to premium features, ad-free access, multiple packs, or other benefits described in the app at the time of purchase.',
                 'Subscriptions automatically renew unless cancelled through your Apple ID or App Store account settings before the renewal date.',
                 'All purchases are processed by Apple. We do not control Apple’s payment processing, billing, refund decisions, taxes, or payment methods.',
@@ -258,8 +289,24 @@ export const termsOfService: LegalDocument = {
             ],
         },
         {
+            id: 'updates-and-supported-versions',
+            title: '7. Updates and Supported Versions',
+            paragraphs: [
+                'We may release updates that change, add, or remove features. To keep the app working correctly and safely, we may require you to install the latest version in order to continue using Cardernir. When this happens, the app will tell you and provide a link to the App Store.',
+                'Older versions may stop working, may no longer receive content updates, or may display features that are no longer offered.',
+            ],
+        },
+        {
+            id: 'notifications',
+            title: '8. Notifications',
+            paragraphs: [
+                'If you allow notifications, Cardernir may send you practice reminders and reminders after a break. Notifications about new content and offers are only sent if you turn them on.',
+                'Some notifications are scheduled on your device and some are sent from our servers. You can change or turn off notifications at any time under Settings → Notifications in the app, or in your device’s iOS settings. Delivery depends on Apple’s systems, your device settings, and your network, so we can’t guarantee that any notification arrives.',
+            ],
+        },
+        {
             id: 'ads',
-            title: '7. Ads and Ad-Free Access',
+            title: '9. Ads and Ad-Free Access',
             paragraphs: [
                 'Cardernir may show ads to users who do not have ad-free or premium access.',
                 'Ads are provided through third-party advertising services such as Google AdMob. We do not control every ad shown by third-party ad networks.',
@@ -268,7 +315,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'content',
-            title: '8. Learning Content',
+            title: '10. Learning Content',
             paragraphs: [
                 'Cardernir’s content may include words, translations, example sentences, images, spaced repetition data, and other learning materials.',
                 'We work to provide useful and accurate learning content, but we do not guarantee that all translations, examples, images, pronunciations, or explanations will be complete, current, or error-free.',
@@ -277,15 +324,15 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'future-features',
-            title: '9. Future Features',
+            title: '11. Future Features',
             paragraphs: [
-                'Cardernir may add, remove, or change features over time, including audio, text-to-speech, additional languages, additional packs, account features, syncing, or other functionality.',
+                'Cardernir may add, remove, or change features over time, including audio, text-to-speech, additional languages, additional packs, account features, syncing, notifications, streaks, or other functionality.',
                 'We may update these Terms or the Privacy Policy when features change.',
             ],
         },
         {
             id: 'acceptable-use',
-            title: '10. Acceptable Use',
+            title: '12. Acceptable Use',
             paragraphs: ['You agree not to misuse Cardernir or interfere with its normal operation.'],
             bullets: [
                 'Do not attempt to access systems, data, or content without authorization.',
@@ -297,7 +344,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'intellectual-property',
-            title: '11. Intellectual Property',
+            title: '13. Intellectual Property',
             paragraphs: [
                 'Cardernir, including its app design, branding, software, decks, packs, text, images, structure, and other content, is owned by us or our licensors and is protected by intellectual property laws.',
                 'Using Cardernir does not give you ownership of the app, brand, code, content, or paid materials.',
@@ -305,7 +352,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'availability',
-            title: '12. Availability and Changes',
+            title: '14. Availability and Changes',
             paragraphs: [
                 'We may modify, suspend, discontinue, replace, limit, or remove parts of Cardernir at any time, with or without notice, where permitted by law.',
                 'We may update packs, change available content, adjust features, fix bugs, remove unavailable assets, or change how the app operates.',
@@ -314,7 +361,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'third-party-services',
-            title: '13. Third-Party Services',
+            title: '15. Third-Party Services',
             paragraphs: [
                 'Cardernir relies on third-party services such as Apple, Google AdMob, and Supabase. These services may be subject to their own terms, policies, limitations, and availability.',
                 'We are not responsible for third-party services, payment systems, ads, outages, policy decisions, or content outside our reasonable control.',
@@ -322,7 +369,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'apple-terms',
-            title: '14. Apple App Store Terms',
+            title: '16. Apple App Store Terms',
             paragraphs: [
                 'If you download or use Cardernir through Apple’s App Store, your use of the app is also subject to Apple’s applicable terms, including Apple’s App Store rules and the standard licensed application end user license agreement unless a separate agreement applies.',
                 'Apple is not responsible for providing maintenance or support for Cardernir.',
@@ -330,7 +377,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'termination',
-            title: '15. Termination',
+            title: '17. Termination',
             paragraphs: [
                 'We may suspend or terminate access to Cardernir if we believe you have violated these Terms, misused the app, created risk for other users or the service, or if required by law.',
                 'You may stop using Cardernir at any time. Deleting the app may remove locally stored progress from your device.',
@@ -338,7 +385,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'disclaimers',
-            title: '16. Disclaimers',
+            title: '18. Disclaimers',
             paragraphs: [
                 'Cardernir is provided on an “as is” and “as available” basis. To the fullest extent permitted by law, we disclaim warranties of any kind, whether express, implied, or statutory, including warranties of merchantability, fitness for a particular purpose, accuracy, availability, and non-infringement.',
                 'Some jurisdictions do not allow certain disclaimers, so some of the above may not apply to you.',
@@ -346,7 +393,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'limitation-of-liability',
-            title: '17. Limitation of Liability',
+            title: '19. Limitation of Liability',
             paragraphs: [
                 'To the fullest extent permitted by law, Cardernir and its developer will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for loss of data, profits, revenue, goodwill, learning progress, or other intangible losses.',
                 'To the fullest extent permitted by law, our total liability for any claim related to Cardernir will not exceed the amount you paid for Cardernir in the twelve months before the claim, or CAD $50 if you paid nothing.',
@@ -354,14 +401,14 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'indemnity',
-            title: '18. Indemnity',
+            title: '20. Indemnity',
             paragraphs: [
                 'You agree to defend, indemnify, and hold harmless Cardernir and its developer from claims, damages, liabilities, losses, and expenses arising from your misuse of Cardernir, violation of these Terms, or violation of any law or third-party rights.',
             ],
         },
         {
             id: 'governing-law',
-            title: '19. Governing Law',
+            title: '21. Governing Law',
             paragraphs: [
                 'These Terms are governed by the laws of the Province of Ontario and the applicable laws of Canada, without regard to conflict of law rules.',
                 'Where required by consumer protection law, you may also have rights under the laws of your country or region of residence.',
@@ -369,7 +416,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'changes',
-            title: '20. Changes to These Terms',
+            title: '22. Changes to These Terms',
             paragraphs: [
                 'We may update these Terms from time to time. When we make changes, we will update the “Last Updated” date above.',
                 'Changes are effective when posted on this page unless a different effective date is stated. Your continued use of Cardernir after changes are posted means you accept the updated Terms.',
@@ -377,7 +424,7 @@ export const termsOfService: LegalDocument = {
         },
         {
             id: 'contact',
-            title: '21. Contact Us',
+            title: '23. Contact Us',
             paragraphs: ['If you have questions about these Terms, contact us at support@cardernir.app.'],
         },
     ],
