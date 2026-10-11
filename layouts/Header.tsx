@@ -35,6 +35,7 @@ export function Header() {
                 <Link className="wordmark" href="/" aria-label="Cardernir home" onClick={closeMenu}>
                     <ElephantMark className="wordmark-mark" />
                     <span className="wordmark-text">Cardernir</span>
+                    <span className="wordmark-badge" aria-label="version 2.0">2.0</span>
                 </Link>
 
                 <button
@@ -51,14 +52,17 @@ export function Header() {
                 </button>
 
                 <div id="site-navigation" className="nav-links" data-open={menuOpen}>
-                    <Link className="nav-anchor" href="/#how-it-works" onClick={closeMenu}>
-                        How it works
+                    <Link className="nav-anchor" href="/#modes" onClick={closeMenu}>
+                        Learn &amp; Focus
                     </Link>
-                    <Link className="nav-anchor" href="/#packs" onClick={closeMenu}>
-                        Packs
+                    <Link className="nav-anchor" href="/#energy" onClick={closeMenu}>
+                        Energy
                     </Link>
-                    <Link className="nav-anchor" href="/#why-cardernir" onClick={closeMenu}>
-                        Why Cardernir
+                    <Link className="nav-anchor" href="/#streak" onClick={closeMenu}>
+                        Streaks
+                    </Link>
+                    <Link className="nav-anchor" href="/#decks" onClick={closeMenu}>
+                        Decks
                     </Link>
                     <Link href="/support" onClick={closeMenu}>
                         Support

@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 
 export const SITE_URL = 'https://www.cardernir.app';
 export const SITE_NAME = 'Cardernir';
-export const SITE_TITLE = 'Cardernir | French Flashcards & Spaced Repetition';
+export const SITE_TITLE = 'Cardernir 2.0 | French Flashcards with Kips';
 export const SITE_DESCRIPTION =
-    'Learn and remember French vocabulary with ready-made flashcard decks, focused reviews, and FSRS spaced repetition.';
-export const SOCIAL_TITLE = 'Cardernir | French vocabulary that comes back before it fades';
+    'French words, yours to keep. Ready-made flashcard decks, Learn and Focus modes, FSRS spaced repetition, and Kips, the study companion who brings each word back before you forget it. Every deck free.';
+export const SOCIAL_TITLE = 'Cardernir 2.0 | French words. Yours to keep.';
 export const APP_STORE_URL = 'https://apps.apple.com/app/cardernir/id6772876444';
 export const APP_STORE_ID = '6772876444';
 
