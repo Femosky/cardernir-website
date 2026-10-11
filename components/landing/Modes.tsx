@@ -86,9 +86,9 @@ export function Modes() {
                             <motion.div
                                 key={mode}
                                 className="modes__phone"
-                                initial={{ opacity: 0, x: reduced ? 0 : mode === 'learn' ? -24 : 24, rotate: reduced ? 0 : mode === 'learn' ? -2 : 2 }}
-                                animate={{ opacity: 1, x: 0, rotate: 0 }}
-                                exit={{ opacity: 0, x: reduced ? 0 : mode === 'learn' ? 24 : -24 }}
+                                initial={{ opacity: 0, x: reduced ? 0 : mode === 'learn' ? -16 : 16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: reduced ? 0 : mode === 'learn' ? 16 : -16 }}
                                 transition={{ type: 'spring', stiffness: 220, damping: 28 }}
                             >
                                 <Phone src={current.screen} alt={current.alt} />

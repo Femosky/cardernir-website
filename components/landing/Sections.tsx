@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { Kips, type KipsHandle } from './Kips';
-import { Phone } from './Phone';
 import { APP_STORE_URL } from '@/lib/siteMetadata';
 
 export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
@@ -36,15 +35,13 @@ export function WhatsNew() {
     return (
         <section className="whatsnew" aria-label="What’s new in 2.0">
             <div className="page-shell">
+                <p className="eyebrow">New in 2.0</p>
                 <ul className="whatsnew__row">
-                    {NEW.map((n, i) => (
-                        <Reveal key={n.k} delay={i * 0.06}>
-                            <li className="whatsnew__item">
-                                <span className="whatsnew__key">{n.k}</span>
-                                <strong>{n.t}</strong>
-                                <p>{n.d}</p>
-                            </li>
-                        </Reveal>
+                    {NEW.map((n) => (
+                        <li key={n.k} className="whatsnew__item">
+                            <strong>{n.t}</strong>
+                            <p>{n.d}</p>
+                        </li>
                     ))}
                 </ul>
             </div>
@@ -63,44 +60,28 @@ const PACKS = [
 export function Collections() {
     return (
         <section id="decks" className="decks" aria-labelledby="decks-title">
-            <div className="page-shell">
-                <div className="section-head section-head--split">
-                    <div>
-                        <p className="eyebrow">3,850 cards, ready for you</p>
-                        <h2 id="decks-title">Every deck, free to study.</h2>
-                    </div>
+            <div className="page-shell decks__grid">
+                <div className="decks__intro">
+                    <p className="eyebrow">3,850 cards, ready for you</p>
+                    <h2 id="decks-title">Every deck, free to study.</h2>
                     <p className="section-lede">
                         Five collections, each with small practice decks for Focus and a complete spaced-repetition deck
-                        for Learn. Meanings in 12 languages.
+                        for Learn. Meanings in English, French, Spanish, German, Italian, Portuguese, Indonesian,
+                        Japanese, Korean and Chinese.
                     </p>
                 </div>
-                <ul className="deck-grid">
-                    {PACKS.map((p, i) => (
-                        <Reveal key={p.name} delay={i * 0.05}>
-                            <li className={`deck-tile deck-tile--${p.hue}`}>
-                                <div className="deck-tile__head">
-                                    <h3>{p.name}</h3>
-                                    <span className="deck-tile__dots" aria-hidden="true">···</span>
-                                </div>
-                                <p>{p.sub}</p>
-                                <div className="deck-tile__foot">
-                                    <span className="deck-tile__ready"><span className="bolt bolt--small" aria-hidden="true" /> Ready now</span>
-                                    <strong>{p.count}</strong>
-                                </div>
-                                <span className="deck-tile__bar" aria-hidden="true" />
-                            </li>
-                        </Reveal>
-                    ))}
-                    <Reveal delay={0.25}>
-                        <li className="deck-tile deck-tile--meanings">
-                            <Phone src="/app/meanings.webp" alt="A card’s meaning shown in the learner’s own language" className="deck-tile__phone" />
+                <ol className="deck-list">
+                    {PACKS.map((p) => (
+                        <li key={p.name} className={`deck-row deck-row--${p.hue}`}>
+                            <span className="deck-row__swatch" aria-hidden="true" />
                             <div>
-                                <h3>Meanings in your language</h3>
-                                <p>English, French, Spanish, German, Italian, Portuguese, Indonesian, Japanese, Korean and Chinese.</p>
+                                <h3>{p.name}</h3>
+                                <p>{p.sub}</p>
                             </div>
+                            <strong>{p.count}</strong>
                         </li>
-                    </Reveal>
-                </ul>
+                    ))}
+                </ol>
             </div>
         </section>
     );

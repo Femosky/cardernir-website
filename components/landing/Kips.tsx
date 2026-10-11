@@ -82,7 +82,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
 
     return (
         <div className={['kips', className].filter(Boolean).join(' ')} style={{ width: size, height: size }} aria-hidden="true">
-            {!reducedMotion && <RiveComponent className="kips__canvas" style={{ opacity: ready ? 1 : 0 }} />}
+            {!reducedMotion && <RiveComponent className="kips__canvas" style={{ visibility: ready ? "visible" : "hidden" }} />}
             <Image
                 className="kips__poster"
                 src={`/kips/${poster}.webp`}
@@ -90,7 +90,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
                 width={size}
                 height={size}
                 priority={priority}
-                style={{ opacity: ready && !reducedMotion ? 0 : 1 }}
+                style={{ visibility: ready && !reducedMotion ? "hidden" : "visible" }}
             />
         </div>
     );

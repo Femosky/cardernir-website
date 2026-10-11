@@ -18,41 +18,12 @@ function enter(delay: number, reduced: boolean) {
     };
 }
 
-/** The white card fan behind the hero: five cards drifting on their own slow, deterministic cycles. */
-function CardFan({ reduced }: { reduced: boolean }) {
-    const cards = [
-        { x: -46, y: 8, r: -18, d: 11 },
-        { x: -24, y: -6, r: -9, d: 13 },
-        { x: 0, y: -12, r: 0, d: 12 },
-        { x: 24, y: -6, r: 9, d: 14 },
-        { x: 46, y: 8, r: 18, d: 10 },
-    ];
-    return (
-        <div className="hero__fan" aria-hidden="true">
-            {cards.map((c, i) => (
-                <span
-                    key={i}
-                    className="hero__fan-card"
-                    style={{
-                        ['--x' as string]: `${c.x}%`,
-                        ['--y' as string]: `${c.y}%`,
-                        ['--r' as string]: `${c.r}deg`,
-                        ['--d' as string]: reduced ? '0s' : `${c.d}s`,
-                        ['--i' as string]: `${i * -2.3}s`,
-                    }}
-                />
-            ))}
-        </div>
-    );
-}
-
 export function Hero() {
     const reduced = Boolean(useReducedMotion());
     const kips = useRef<KipsHandle>(null);
 
     return (
         <section className="hero" aria-labelledby="hero-title">
-            <CardFan reduced={reduced} />
             <div className="page-shell hero__grid">
                 <div className="hero__copy">
                     <motion.p className="eyebrow" {...enter(0.05, reduced)}>
@@ -84,19 +55,11 @@ export function Hero() {
                     <Phone src="/app/home.webp" alt="Cardernir Home: Learn and Focus modes, a 47-day candle and 25 Energy" className="hero__phone" priority />
                     <motion.div
                         className="hero__kips"
-                        initial={{ opacity: 0, y: reduced ? 0 : 40, scale: reduced ? 1 : 0.94 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ ...spring, delay: 0.75 }}
-                        onHoverStart={() => kips.current?.correct()}
-                        onTap={() => kips.current?.sessionComplete(true)}
+                        initial={{ opacity: 0, y: reduced ? 0 : 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ ...spring, delay: 0.6 }}
                     >
-                        <Kips ref={kips} poster="hello_wave" size={300} priority />
-                    </motion.div>
-                    <motion.div className="hero__chip hero__chip--candle" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.9 }}>
-                        <span className="flame" aria-hidden="true" /> 47
-                    </motion.div>
-                    <motion.div className="hero__chip hero__chip--energy" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 1.0 }}>
-                        <span className="bolt" aria-hidden="true" /> 25
+                        <Kips ref={kips} poster="neutral" size={300} priority />
                     </motion.div>
                 </motion.div>
             </div>

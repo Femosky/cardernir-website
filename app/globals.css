@@ -39,15 +39,15 @@
     --foreground: #f7f7f8;
     --primary: #f7f7f8;
     --secondary: #c9cbd1;
-    --accent: #69d0ff;
-    --accent-foreground: #17181c;
+    --accent: #6b8bff;
+    --accent-foreground: #ffffff;
     --card: #191a20;
     --card-foreground: #f7f7f8;
     --muted: #23252c;
     --muted-foreground: #c9cbd1;
     --border: #353842;
-    --button-primary: #69d0ff;
-    --button-primary-foreground: #17181c;
+    --button-primary: #4f74ff;
+    --button-primary-foreground: #ffffff;
     --button-secondary: #23252c;
     --button-secondary-foreground: #f7f7f8;
     --canvas: #111216;
@@ -57,9 +57,9 @@
     --cream-ink: #f7f7f8;
     --dark-band: #191a20;
     --dark-band-foreground: #f7f7f8;
-    --brand-blue: #69d0ff;
-    --brand-blue-deep: #3fb5ea;
-    --brand-sky: #69d0ff;
+    --brand-blue: #5b7cff;
+    --brand-blue-deep: #4f74ff;
+    --brand-sky: #8fa6ff;
     --text-tertiary: #8f929b;
     --hairline: rgba(247, 247, 248, 0.14);
     --dark-hairline: rgba(247, 247, 248, 0.17);
@@ -138,7 +138,7 @@ svg {
     height: 4px;
     pointer-events: none;
     transform-origin: left center;
-    background: linear-gradient(90deg, #426bff 0%, #6b8fff 52%, #69d0ff 100%);
+    background: linear-gradient(90deg, #2f5bff 0%, #5b7cff 100%);
 }
 
 .page-transition {
