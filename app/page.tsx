@@ -1,8 +1,4 @@
-import { Hero } from '@/components/landing/Hero';
-import { Modes } from '@/components/landing/Modes';
-import { ComboDemo } from '@/components/landing/ComboDemo';
-import { Streak } from '@/components/landing/Streak';
-import { Closing, Collections, Maker, WhatsNew } from '@/components/landing/Sections';
+import { Presentation } from '@/components/landing/Presentation';
 import {
     APP_STORE_URL,
     BRAND_IMAGE_URL,
@@ -84,14 +80,7 @@ export default function Home() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
             />
-            <Hero />
-            <WhatsNew />
-            <Modes />
-            <ComboDemo />
-            <Streak />
-            <Collections />
-            <Maker />
-            <Closing />
+            <Presentation />
         </main>
     );
 }

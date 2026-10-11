@@ -52,17 +52,17 @@ export function Header() {
                 </button>
 
                 <div id="site-navigation" className="nav-links" data-open={menuOpen}>
-                    <Link className="nav-anchor" href="/#modes" onClick={closeMenu}>
-                        Learn &amp; Focus
+                    <Link className="nav-anchor" href="/#learn" onClick={closeMenu}>
+                        Learn
+                    </Link>
+                    <Link className="nav-anchor" href="/#focus" onClick={closeMenu}>
+                        Focus
                     </Link>
                     <Link className="nav-anchor" href="/#energy" onClick={closeMenu}>
                         Energy
                     </Link>
                     <Link className="nav-anchor" href="/#streak" onClick={closeMenu}>
                         Streaks
-                    </Link>
-                    <Link className="nav-anchor" href="/#decks" onClick={closeMenu}>
-                        Decks
                     </Link>
                     <Link href="/support" onClick={closeMenu}>
                         Support
