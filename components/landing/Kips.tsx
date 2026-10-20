@@ -5,9 +5,8 @@ import Image from 'next/image';
 import { Alignment, EventType, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
 
-/** Kips, running on the app's own Rive file.
- *  The site plays the file's linear animations directly (Idle, then an emote, then a hard cut back to Idle) instead
- *  of the state machine, whose transitions blend one pose into the next and read as a crossfade. */
+/** Kips, running on the app's own Rive file: the same state machine and data-binding triggers the app drives.
+ *  `intro` plays one of the file's linear animations first (the splash wave, say) and then hands over to Idle. */
 export type KipsHandle = {
     correct: () => void;
     wrong: () => void;
@@ -24,23 +23,20 @@ type KipsProps = {
     size?: number;
     priority?: boolean;
     onReady?: () => void;
-    /** The resting animation to loop (Idle by default; Happy for a warmer stance). */
-    idle?: string;
+    /** Linear-animation mode: play this animation once, then loop Idle. No state machine, no triggers. */
+    intro?: string;
 };
 
-const IDLE = 'Idle';
-/** A safety net: one-shots end on their own; a looping mood (Worried) is cut after its hold. */
-const HOLD_MS: Record<string, number> = { Worried: 1800 };
-const HOLD_DEFAULT_MS = 9000;
+/* The runtime drops a trigger fired while the machine is still blending into a state (the app waits this out too). */
+const SETTLE_MS = 450;
 
 export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
-    { className, poster = 'neutral', size = 360, priority = false, onReady, idle = IDLE },
+    { className, poster = 'neutral', size = 360, priority = false, onReady, intro },
     ref,
 ) {
     const reducedMotion = useReducedMotion();
     const [ready, setReady] = useState(false);
-    const switching = useRef(false);
-    const timer = useRef<number | null>(null);
+    const settledAt = useRef(0);
 
     const { rive, RiveComponent } = useRive(
         reducedMotion
@@ -48,10 +44,11 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             : {
                   src: '/kips/kips.riv',
                   artboard: 'Elephant_v3',
-                  animations: idle,
+                  ...(intro ? { animations: intro } : { stateMachines: 'ElephantStateMachine', autoBind: true }),
                   autoplay: true,
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.BottomCenter }),
                   onLoad: () => {
+                      settledAt.current = Date.now() + SETTLE_MS;
                       setReady(true);
                       onReady?.();
                   },
@@ -59,43 +56,36 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         { fitCanvasToArtboardHeight: false },
     );
 
-    // a hard cut: stop whatever plays, start the emote; when it ends, cut back to Idle
-    const cut = useCallback(
-        (name: string) => {
-            if (!rive) return;
-            switching.current = true;
-            rive.stop();
-            rive.play(name);
-            switching.current = false;
-            if (timer.current) window.clearTimeout(timer.current);
-            timer.current = window.setTimeout(() => {
-                if (rive.playingAnimationNames.includes(name)) { switching.current = true; rive.stop(); rive.play(idle); switching.current = false; }
-            }, HOLD_MS[name] ?? HOLD_DEFAULT_MS);
-        },
-        [rive, idle],
-    );
-
+    // intro mode: when the intro ends, Idle takes over and loops
     useEffect(() => {
-        if (!rive) return;
-        const onStop = () => {
-            if (switching.current) return;
-            if (rive.playingAnimationNames.length === 0) rive.play(idle);
-        };
+        if (!rive || !intro) return;
+        const onStop = () => { if (rive.playingAnimationNames.length === 0) rive.play('Idle'); };
         rive.on(EventType.Stop, onStop);
-        return () => { rive.off(EventType.Stop, onStop); if (timer.current) window.clearTimeout(timer.current); };
-    }, [rive, idle]);
+        return () => rive.off(EventType.Stop, onStop);
+    }, [rive, intro]);
+
+    const fire = useCallback(
+        (name: string, setup?: () => void) => {
+            const vm = rive?.viewModelInstance;
+            if (!vm) return;
+            const go = () => { setup?.(); vm.trigger(name)?.trigger(); settledAt.current = Date.now() + SETTLE_MS; };
+            const wait = settledAt.current - Date.now();
+            if (wait > 0) window.setTimeout(go, wait); else go();
+        },
+        [rive],
+    );
 
     useImperativeHandle(
         ref,
         () => ({
-            correct: () => cut('AnswerCorrect'),
-            wrong: () => cut('AnswerWrong'),
-            hard: () => cut('Worried'),
-            combo: (tier) => cut(`Combo${tier}`),
-            sessionComplete: (perfect = false) => cut(perfect ? 'SessionPerfect' : 'SessionComplete'),
-            premium: () => cut('PremiumActivated'),
+            correct: () => fire('answerCorrect'),
+            wrong: () => fire('answerWrong'),
+            hard: () => fire('answerHard'),
+            combo: (tier) => fire('comboReached', () => { const n = rive?.viewModelInstance?.number('comboTier'); if (n) n.value = tier; }),
+            sessionComplete: (perfect = false) => fire('sessionCompleted', () => { const b = rive?.viewModelInstance?.boolean('sessionPerfect'); if (b) b.value = perfect; }),
+            premium: () => fire('premiumActivated'),
         }),
-        [cut],
+        [fire, rive],
     );
 
     useEffect(() => () => rive?.cleanup(), [rive]);

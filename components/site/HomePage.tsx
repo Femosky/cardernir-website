@@ -29,7 +29,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
                 <div className="shell hero__grid">
-                    <div className="hero__kips"><Image className="hero__wave" src="/kips/hello_wave.webp" alt="" width={440} height={440} priority sizes="(max-width: 700px) 300px, 440px" /></div>
+                    <div className="hero__kips"><KipsLive quiet intro="HeroHello" poster="hello_wave" size={440} /></div>
                     <div className="hero__copy">
                         <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
                         <p className="lede">{t.hero.body}</p>

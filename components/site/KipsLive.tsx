@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Kips, type KipsHandle } from '@/components/landing/Kips';
 
-type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?: boolean; idle?: string; poster?: 'hello_wave' | 'happy_joy' | 'excited_open' | 'neutral' | 'cheer_arms_up' };
+type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?: boolean; intro?: string; poster?: 'hello_wave' | 'happy_joy' | 'excited_open' | 'neutral' | 'cheer_arms_up' };
 
 /** Kips on a marketing stage: idling, reacting once when he scrolls into view, and, when interactive, on every tap. */
-export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false, idle, poster }: Props) {
+export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false, intro, poster }: Props) {
     const kips = useRef<KipsHandle>(null);
     const taps = useRef(0);
     const lastTap = useRef(0);
@@ -29,7 +29,7 @@ export function KipsLive({ celebrate = false, size = 360, interactive = false, q
             tabIndex={interactive ? 0 : undefined}
             onKeyDown={interactive ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(); } } : undefined}
         >
-            <Kips ref={kips} poster={poster ?? (celebrate ? 'cheer_arms_up' : 'neutral')} size={size} idle={idle} />
+            <Kips ref={kips} poster={poster ?? (celebrate ? 'cheer_arms_up' : 'neutral')} size={size} intro={intro} priority={Boolean(intro)} />
         </motion.div>
     );
 }

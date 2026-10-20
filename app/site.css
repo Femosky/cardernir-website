@@ -269,7 +269,7 @@
     .split, .hero__grid { grid-template-columns: 1fr; gap: 40px; }
     .hero__copy { text-align: center; display: grid; justify-items: center; }
     .hero__actions { justify-content: center; }
-    .hero__wave { width: 320px; }
+    .hero__kips .kips { width: 320px !important; height: 320px !important; }
     .split--reverse .split__copy { order: 0; }
     .split__copy { text-align: center; display: grid; justify-items: center; }
 }
@@ -279,7 +279,7 @@
     .try { padding: 120px 0 80px; }
     .candle { width: 300px; height: 340px; }
     .streak-hero { width: 460px !important; height: 460px !important; translate: -50% calc(-50% - 20px); }
-    .hero__wave { width: 300px; }
+    .hero__kips .kips { width: 300px !important; height: 300px !important; }
     .hero__title { font-size: 44px; }
     .hero__demo { margin-top: 44px; }
     .lesson { --stack-w: 300px; }
