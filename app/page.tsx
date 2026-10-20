@@ -1,4 +1,4 @@
-import { Presentation } from '@/components/landing/Presentation';
+import { Lesson } from '@/components/lesson/Lesson';
 import {
     APP_STORE_URL,
     BRAND_IMAGE_URL,
@@ -8,7 +8,7 @@ import {
     SITE_URL,
     SOCIAL_IMAGE_URL,
 } from '@/lib/siteMetadata';
-import './landing.css';
+import './lesson.css';
 
 const structuredData = {
     '@context': 'https://schema.org',
@@ -75,12 +75,12 @@ const structuredData = {
 
 export default function Home() {
     return (
-        <main className="landing">
+        <main className="landing landing--lesson">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
             />
-            <Presentation />
+            <Lesson />
         </main>
     );
 }
