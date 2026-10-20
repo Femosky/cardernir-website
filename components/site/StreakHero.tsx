@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useInView, useReducedMotion } from 'motion/react';
-import { KIPS_RIV } from '@/lib/kips';
+import { useKipsSource, useNearViewport } from '@/lib/kipsFile';
 
 /* The app's streak candle, from the same Rive file: the StreakHero mood of the elephant's state machine shows the
    candle with the day's count; `streakIncremented` refuels it and counts up, exactly as the app does at the end of
@@ -17,14 +17,16 @@ export function StreakHero({ size = 380 }: { size?: number }) {
     const inView = useInView(box, { once: true, amount: 0.6 });
     const [ready, setReady] = useState(false);
     const fired = useRef(false);
+    const near = useNearViewport(box);          // created only when the reader gets near it, from the shared file
+    const source = useKipsSource();
 
     const { rive, RiveComponent } = useRive(
-        reduced
+        reduced || !near || !source
             ? null
             : {
-                  src: KIPS_RIV,
+                  ...source,
                   artboard: 'Elephant_v3',
-                  stateMachines: 'ElephantStateMachine',
+                  stateMachine: 'ElephantStateMachine',
                   autoplay: true,
                   autoBind: true,
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),

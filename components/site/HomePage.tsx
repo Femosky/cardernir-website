@@ -6,6 +6,7 @@ import { ForgetCurve } from '@/components/site/ForgetCurve';
 import { StreakHero } from '@/components/site/StreakHero';
 import { Reveal } from '@/components/HomeMotion';
 import { APP_STORE_URL } from '@/lib/siteMetadata';
+import { KipsFileProvider } from '@/lib/kipsFile';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Dictionary } from '@/lib/i18n';
 
@@ -26,6 +27,7 @@ function Badge({ label }: { label: string }) {
    search engines and assistants, then the download. Every chapter is a headline, one sentence and a picture. */
 export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
     return (
+        <KipsFileProvider>
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
                 <div className="shell hero__grid">
@@ -133,5 +135,6 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                 </div>
             </section>
         </main>
+        </KipsFileProvider>
     );
 }

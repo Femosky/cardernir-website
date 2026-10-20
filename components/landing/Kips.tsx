@@ -4,7 +4,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import Image from 'next/image';
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
-import { KIPS_RIV } from '@/lib/kips';
+import { useKipsSource, useNearViewport } from '@/lib/kipsFile';
 
 /** Kips, running on the app's own Rive file: the same state machine and data-binding triggers the app drives.
  *  `intro` names a trigger to fire once the machine has settled into Idle (the hero's `heroHello` wave, say); the
@@ -40,14 +40,18 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
     const reducedMotion = useReducedMotion();
     const [ready, setReady] = useState(false);
     const settledAt = useRef(0);
+    const box = useRef<HTMLDivElement>(null);
+    // the player is created only near the viewport (the hero, `priority`, at once), from the page's one shared file
+    const near = useNearViewport(box, priority);
+    const source = useKipsSource();
 
     const { rive, RiveComponent } = useRive(
-        reducedMotion
+        reducedMotion || !near || !source
             ? null
             : {
-                  src: KIPS_RIV,
+                  ...source,
                   artboard: 'Elephant_v3',
-                  stateMachines: 'ElephantStateMachine',
+                  stateMachine: 'ElephantStateMachine',
                   autoBind: true,
                   autoplay: true,
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.BottomCenter }),
@@ -96,7 +100,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
     useEffect(() => () => rive?.cleanup(), [rive]);
 
     return (
-        <div className={['kips', className].filter(Boolean).join(' ')} style={{ width: size, height: size }} aria-hidden="true">
+        <div ref={box} className={['kips', className].filter(Boolean).join(' ')} style={{ width: size, height: size }} aria-hidden="true">
             {!reducedMotion && <RiveComponent className="kips__canvas" style={{ visibility: ready ? 'visible' : 'hidden' }} />}
             <Image
                 className="kips__poster"
