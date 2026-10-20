@@ -29,7 +29,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
                 <div className="shell hero__grid">
-                    <div className="hero__kips"><KipsLive quiet intro="HeroHello" poster="neutral" size={440} /></div>
+                    <div className="hero__kips"><KipsLive quiet intro="heroHello" poster="neutral" size={440} /></div>
                     <div className="hero__copy">
                         <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
                         <p className="lede">{t.hero.body}</p>

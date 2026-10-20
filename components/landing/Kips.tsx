@@ -2,12 +2,13 @@
 
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import Image from 'next/image';
-import { Alignment, EventType, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
 import { KIPS_RIV } from '@/lib/kips';
 
 /** Kips, running on the app's own Rive file: the same state machine and data-binding triggers the app drives.
- *  `intro` plays one of the file's linear animations first (the splash wave, say) and then hands over to Idle. */
+ *  `intro` names a trigger to fire once the machine has settled into Idle (the hero's `heroHello` wave, say); the
+ *  state machine then blends back into Idle on its own, so there is no seam where the greeting ends. */
 export type KipsHandle = {
     correct: () => void;
     wrong: () => void;
@@ -25,7 +26,7 @@ type KipsProps = {
     size?: number;
     priority?: boolean;
     onReady?: () => void;
-    /** Linear-animation mode: play this animation once, then loop Idle. No state machine, no triggers. */
+    /** A trigger to fire once, right after load (`heroHello`): the one-shot plays and blends back into Idle. */
     intro?: string;
 };
 
@@ -46,7 +47,8 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             : {
                   src: KIPS_RIV,
                   artboard: 'Elephant_v3',
-                  ...(intro ? { animations: intro } : { stateMachines: 'ElephantStateMachine', autoBind: true }),
+                  stateMachines: 'ElephantStateMachine',
+                  autoBind: true,
                   autoplay: true,
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.BottomCenter }),
                   onLoad: () => {
@@ -58,12 +60,12 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         { fitCanvasToArtboardHeight: false },
     );
 
-    // intro mode: when the intro ends, Idle takes over and loops
+    // the intro: one trigger, fired once the machine has settled into Idle (a trigger fired mid-blend is dropped)
     useEffect(() => {
         if (!rive || !intro) return;
-        const onStop = () => { if (rive.playingAnimationNames.length === 0) rive.play('Idle'); };
-        rive.on(EventType.Stop, onStop);
-        return () => rive.off(EventType.Stop, onStop);
+        const wait = Math.max(0, settledAt.current - Date.now());
+        const t = window.setTimeout(() => { rive.viewModelInstance?.trigger(intro)?.trigger(); settledAt.current = Date.now() + SETTLE_MS; }, wait);
+        return () => window.clearTimeout(t);
     }, [rive, intro]);
 
     const fire = useCallback(
