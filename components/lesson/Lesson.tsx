@@ -80,8 +80,11 @@ export function Lesson({ t, compact = false }: Props) {
     // fly-off target in pixels, measured when the rating happens (a percent target on the bound x/y motion values
     // does not animate from a px start)
     const fly = useCallback((dir: Dir) => {
-        const w = stageRef.current?.clientWidth ?? 320; const h = w / 0.68;
-        return { left: { x: -w * 1.8, y: 0 }, right: { x: w * 1.8, y: 0 }, up: { x: 0, y: -h * 1.3 }, down: { x: 0, y: h * 1.3 } }[dir];
+        const el = stageRef.current; const r = el?.getBoundingClientRect();
+        const w = r?.width ?? 320; const h = r?.height ?? w / 0.68;
+        const cx = r ? r.left + w / 2 : window.innerWidth / 2; const cy = r ? r.top + h / 2 : window.innerHeight / 2;
+        // past the edge of the viewport, as the app's cards leave the phone's screen
+        return { left: { x: -(cx + w), y: 0 }, right: { x: window.innerWidth - cx + w, y: 0 }, up: { x: 0, y: -(cy + h) }, down: { x: 0, y: window.innerHeight - cy + h } }[dir];
     }, []);
 
     const rate = useCallback((r: Rating) => {
@@ -105,7 +108,7 @@ export function Lesson({ t, compact = false }: Props) {
             reset();
             if (index + 1 >= cards.length) { setDone(true); window.setTimeout(() => kips.current?.sessionComplete(missed.length === 0 && strong), 200); }
             else setIndex((i) => i + 1);
-        }, reduced ? 0 : 540);
+        }, reduced ? 0 : 660);
     }, [current, leaving, flipping, run, index, cards.length, reduced, reset, missed.length, fly]);
 
     const onDrag = (_: unknown, info: PanInfo) => {
@@ -193,7 +196,7 @@ export function Lesson({ t, compact = false }: Props) {
                                     whileDrag={{ cursor: 'grabbing' }}
                                     initial={{ scale: st.scale, x: st.x, y: st.y, rotate: st.rotate }}
                                     animate={isLeaving
-                                        ? { ...leaving!.to, rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.5, ease: [0.3, 0.7, 0.4, 1] } }
+                                        ? { ...leaving!.to, rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.62, ease: [0.45, 0, 0.75, 0.55] } }
                                         : isFront ? { scale: 1, transition: { type: 'spring', stiffness: 320, damping: 30 } }
                                         : { scale: st.scale, x: st.x, y: st.y, rotate: st.rotate, transition: { type: 'spring', stiffness: 320, damping: 30 } }}
                                     exit={{ opacity: 0, transition: { duration: 0.08 } }}

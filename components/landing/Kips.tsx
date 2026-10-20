@@ -49,8 +49,8 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.BottomCenter }),
                   onLoad: () => {
                       settledAt.current = Date.now() + SETTLE_MS;
-                      setReady(true);
-                      onReady?.();
+                      // the first paint can land before the canvas has taken its CSS size; show it two frames later
+                      requestAnimationFrame(() => requestAnimationFrame(() => { setReady(true); onReady?.(); }));
                   },
               },
         { fitCanvasToArtboardHeight: false },
@@ -88,6 +88,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         [fire, rive],
     );
 
+    useEffect(() => { rive?.resizeDrawingSurfaceToCanvas(); }, [rive, ready]);
     useEffect(() => () => rive?.cleanup(), [rive]);
 
     return (
