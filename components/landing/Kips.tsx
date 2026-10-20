@@ -72,16 +72,24 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         return () => window.clearTimeout(t);
     }, [rive, intro]);
 
+    // a moment asked for before the player exists (it is created near the viewport, and the page fires its
+    // appear reaction as it scrolls in) is held and played once the player has loaded, instead of being dropped
+    const pending = useRef<{ name: string; setup?: () => void } | null>(null);
     const fire = useCallback(
         (name: string, setup?: () => void) => {
             const vm = rive?.viewModelInstance;
-            if (!vm) return;
+            if (!vm || !ready) { pending.current = { name, setup }; return; }
             const go = () => { setup?.(); vm.trigger(name)?.trigger(); settledAt.current = Date.now() + SETTLE_MS; };
             const wait = settledAt.current - Date.now();
             if (wait > 0) window.setTimeout(go, wait); else go();
         },
-        [rive],
+        [rive, ready],
     );
+    useEffect(() => {
+        if (!ready || !rive?.viewModelInstance || !pending.current) return;
+        const { name, setup } = pending.current; pending.current = null;
+        fire(name, setup);
+    }, [ready, rive, fire]);
 
     useImperativeHandle(
         ref,
