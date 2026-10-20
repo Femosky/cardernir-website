@@ -42,7 +42,6 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             </section>
 
             <section id="try" className="try" aria-labelledby="try-title">
-                <svg className="try__hills" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H1440 V28 C 1240 28 1080 140 720 140 C 360 140 200 28 0 28 Z" /></svg>
                 <div className="shell try__inner">
                     <h2 id="try-title" className="try__title">{t.hero.tryTitle}</h2>
                     <p className="try__hint">{t.hero.tryHint}</p>
@@ -71,6 +70,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                         <p className="lede">{t.streak.body}</p>
                     </Reveal>
                 </div>
+                <svg className="wax" viewBox="0 0 1440 80" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><path d="M0 0 H1440 V6 H1259 C 1259 31 1256 52 1240 52 C 1224 52 1221 31 1221 6 H994 C 994 27 992 44 980 44 C 968 44 966 27 966 6 H723 C 723 37 719 62 700 62 C 681 62 677 37 677 6 H435 C 435 22 433 36 420 36 C 407 36 405 22 405 6 H190 C 190 35 187 58 170 58 C 153 58 150 35 150 6 H0 Z" /></svg>
             </section>
 
             <section id="decks" className="block block--cyan" aria-labelledby="free-title">
@@ -99,7 +99,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                 </div>
             </section>
 
-            <section className="block block--navy" aria-labelledby="ready-title">
+            <section className="block block--blush" aria-labelledby="ready-title">
                 <div className="shell chapter">
                     <Reveal className="chapter__copy">
                         <h2 id="ready-title">{t.ready.title}</h2>

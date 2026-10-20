@@ -39,10 +39,8 @@
 .hero__demo { width: min(100%, 520px); margin-top: 48px; }
 
 /* the lesson, as its own chapter: the hero's ground dips into it */
-.try { --sky: #e8eeff; position: relative; background: var(--sky); padding: 110px 0 48px; scroll-margin-top: 76px; }
+.try { --sky: #e8eeff; position: relative; background: var(--sky); padding: 72px 0 48px; scroll-margin-top: 76px; }
 .dark .try { --sky: #141a33; }
-.try__hills { position: absolute; left: 0; right: 0; top: -1px; width: 100%; height: 104px; display: block; }
-.try__hills path { fill: var(--canvas); }
 .try .lesson { --stack-w: min(360px, max(250px, calc((100svh - 560px) * 0.68))); }
 .try .lesson--done { min-height: min(700px, calc(100svh - 300px)); }
 .try__inner { display: grid; justify-items: center; text-align: center; }
@@ -158,13 +156,14 @@
 .block { padding-block: 120px; }
 .block--blue { background: var(--brand-blue); color: #fff; }
 .block--blue .lede { color: rgba(255, 255, 255, 0.84); }
-.block--warm { background: #ffe2bb; }
-.dark .block--warm { background: #2c1d0a; }
+.block--warm { --wax: #ffe2bb; position: relative; z-index: 1; background: var(--wax); }
+.dark .block--warm { --wax: #2c1d0a; }
+.wax { position: absolute; left: 0; right: 0; bottom: -79px; width: 100%; height: 80px; display: block; pointer-events: none; }
+.wax path { fill: var(--wax); }
 .block--cyan { background: #d2effb; }
 .dark .block--cyan { background: #08222f; }
-.block--navy { background: #1b2a7a; color: #fff; }
-.dark .block--navy { background: #141f5c; }
-.block--navy .lede { color: rgba(255, 255, 255, 0.82); }
+.block--blush { background: #f9e3e6; }
+.dark .block--blush { background: #2a1b22; }
 .chapter { display: grid; justify-items: center; text-align: center; gap: 56px; }
 .chapter__copy { display: grid; justify-items: center; }
 .chapter__copy .lede { max-width: 620px; }
