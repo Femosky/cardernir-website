@@ -4,7 +4,6 @@ import './globals.css';
 import './site.css';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
-import { SiteMotion } from '@/components/SiteMotion';
 import { APP_STORE_ID, SITE_NAME, SITE_URL } from '@/lib/siteMetadata';
 
 const nunito = Nunito({ subsets: ['latin', 'latin-ext', 'vietnamese'], weight: ['600', '700', '800', '900'], display: 'swap', variable: '--font-nunito' });
@@ -36,7 +35,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en" suppressHydrationWarning className={`${nunito.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
-                <SiteMotion />
                 <ThemeProvider>
                     {children}
                     <Analytics />
