@@ -179,7 +179,8 @@ export function Lesson({ t, compact = false }: Props) {
                         {visible.map((card, depth) => {
                             const isFront = depth === 0; const st = stackStyle(card.id, depth);
                             const isLeaving = leaving?.id === card.id;
-                            const tint = isFront ? preview : null;
+                            // the rating colour belongs to the card that is leaving, never to the one taking its place
+                            const tint = leaving ? (isLeaving ? preview : null) : isFront ? preview : null;
                             return (
                                 <motion.div
                                     key={card.id}
