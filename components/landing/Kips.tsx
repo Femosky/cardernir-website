@@ -9,6 +9,7 @@ import { useReducedMotion } from 'motion/react';
 export type KipsHandle = {
     correct: () => void;
     wrong: () => void;
+    hard: () => void;
     combo: (tier: 1 | 2 | 3 | 4) => void;
     sessionComplete: (perfect?: boolean) => void;
     premium: () => void;
@@ -63,6 +64,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         () => ({
             correct: () => fire('answerCorrect'),
             wrong: () => fire('answerWrong'),
+            hard: () => fire('answerHard'),
             combo: (tier) =>
                 fire('comboReached', () => {
                     const n = rive?.viewModelInstance?.number('comboTier');

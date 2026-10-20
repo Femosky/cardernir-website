@@ -1,28 +1,21 @@
 import type { MetadataRoute } from 'next';
 import { BRAND_IMAGE_URL, SITE_URL, SOCIAL_IMAGE_URL } from '@/lib/siteMetadata';
-
-const routes = [
-    { path: '', changeFrequency: 'monthly', priority: 1 },
-    { path: '/support', changeFrequency: 'yearly', priority: 0.6 },
-    { path: '/privacy', changeFrequency: 'yearly', priority: 0.3 },
-    { path: '/terms', changeFrequency: 'yearly', priority: 0.3 },
-] as const;
+import { LOCALES, homePath } from '@/lib/i18n/locales';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    return routes.map(({ path, ...metadata }) => ({
-        url: `${SITE_URL}${path}`,
-        ...(path === ''
-            ? {
-                  images: [
-                      BRAND_IMAGE_URL,
-                      SOCIAL_IMAGE_URL,
-                      `${SITE_URL}/hero-image-soft.png`,
-                      `${SITE_URL}/cardernir-choose-goal.jpeg`,
-                      `${SITE_URL}/cardernir-focused-sessions.jpeg`,
-                      `${SITE_URL}/cardernir-review-due.jpeg`,
-                  ],
-              }
-            : {}),
-        ...metadata,
+    const languages: Record<string, string> = { 'x-default': SITE_URL + '/' };
+    for (const l of LOCALES) languages[l.hreflang] = SITE_URL + homePath(l.code);
+    const homes: MetadataRoute.Sitemap = LOCALES.map((l) => ({
+        url: SITE_URL + homePath(l.code),
+        changeFrequency: 'monthly',
+        priority: l.code === 'en' ? 1 : 0.8,
+        alternates: { languages },
+        images: l.code === 'en' ? [BRAND_IMAGE_URL, SOCIAL_IMAGE_URL] : undefined,
     }));
+    const pages: MetadataRoute.Sitemap = [
+        { url: `${SITE_URL}/support`, changeFrequency: 'yearly', priority: 0.6 },
+        { url: `${SITE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+        { url: `${SITE_URL}/terms`, changeFrequency: 'yearly', priority: 0.3 },
+    ];
+    return [...homes, ...pages];
 }

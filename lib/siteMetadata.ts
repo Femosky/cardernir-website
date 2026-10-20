@@ -74,3 +74,21 @@ export function createPageMetadata({
         },
     };
 }
+
+import { LOCALES, homePath, localeInfo, type LocaleCode } from '@/lib/i18n/locales';
+import type { Dictionary } from '@/lib/i18n';
+
+/** Home-page metadata for a locale, with hreflang alternates for all twelve and x-default on English. */
+export function homeMetadata(locale: LocaleCode, t: Dictionary): Metadata {
+    const path = homePath(locale); const info = localeInfo(locale);
+    const languages: Record<string, string> = { 'x-default': '/' };
+    for (const l of LOCALES) languages[l.hreflang] = homePath(l.code);
+    return {
+        title: { default: t.meta.title, template: '%s | Cardernir' },
+        description: t.meta.description,
+        alternates: { canonical: path, languages },
+        keywords: ['french flashcards', 'learn french', 'french vocabulary', 'spaced repetition', 'fsrs', 'anki alternative', 'language learning app', 'cardernir', 'kips'],
+        openGraph: { type: 'website', locale: info.og, siteName: SITE_NAME, title: t.meta.social, description: t.meta.description, url: path, images: sharedOpenGraphImages },
+        twitter: { card: 'summary_large_image', title: t.meta.social, description: t.meta.description, images: [sharedTwitterImage] },
+    };
+}

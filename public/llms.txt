@@ -1,0 +1,25 @@
+# Cardernir
+
+> Cardernir is a free iPhone app for learning French vocabulary with flashcards and spaced repetition. It ships with 3,850 French cards across five collections, a Learn mode scheduled by the open-source FSRS algorithm, a Focus mode for quick practice, daily streaks shown as a candle, an Energy system that makes every deck free, and a study companion called Kips. Card meanings are available in 12 languages. No account is required. Built independently in Canada.
+
+## Facts
+
+- Platform: iPhone (iOS), with Home Screen widgets. App Store: https://apps.apple.com/app/cardernir/id6772876444
+- Price: free. New words use Energy (25, refilling hourly, or a short ad). Premium: unlimited Energy, no ads.
+- Content: 3,850 French-to-meaning cards, five collections: French Core (1,000), Everyday French Phrases (550), French Verb Mastery (800), French for Travel (700), TEF / TCF Canada Prep (800). Every card has a verified meaning, a description and example sentences. Nothing to import or build.
+- Scheduling: FSRS spaced repetition. Ratings: Again, Hard, Good, Easy. Five correct in a row builds a combo that wins Energy back.
+- Modes: Learn (spaced repetition, a few new words a day) and Focus (run through a topic deck; does not change the Learn schedule).
+- Streaks: a candle that burns down through the day; a short session keeps it lit. Milestones at 7, 30, 100 and 365 days.
+- Meaning languages: English, French, German, Spanish, Italian, Portuguese (Brazil), Portuguese (Portugal), Indonesian, Japanese, Korean, Simplified Chinese, Traditional Chinese.
+- Mascot: Kips, a blue elephant who reacts to answers, combos and streaks.
+- Differences from Anki: content included and reviewed; no deck building; FSRS scheduling with no settings; streaks, Energy and Kips.
+- Privacy: no account, no sign-up; progress stays on the device.
+
+## Pages
+
+- Home (English): https://www.cardernir.app/
+- Localized: /fr, /de, /es, /it, /pt-br, /pt-pt, /id, /ja, /ko, /zh-hans, /zh-hant
+- Support: https://www.cardernir.app/support
+- Privacy: https://www.cardernir.app/privacy
+- Terms: https://www.cardernir.app/terms
+- Contact: support@cardernir.app
