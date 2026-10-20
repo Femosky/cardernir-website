@@ -42,7 +42,7 @@ export function Lesson({ t, compact = false }: Props) {
     const [flipped, setFlipped] = useState(false);
     const [showBack, setShowBack] = useState(false);
     const [flipping, setFlipping] = useState(false);
-    const [leaving, setLeaving] = useState<{ id: string; dir: Dir } | null>(null);
+    const [leaving, setLeaving] = useState<{ id: string; dir: Dir; to: { x: number; y: number } } | null>(null);
     const [preview, setPreview] = useState<Dir | null>(null);
     const [energy, setEnergy] = useState(25);
     const [run, setRun] = useState(0);
@@ -77,10 +77,17 @@ export function Lesson({ t, compact = false }: Props) {
         window.setTimeout(() => setFlipping(false), reduced ? 0 : FLIP_MS);
     }, [flipping, leaving, current, flipped, reduced]);
 
+    // fly-off target in pixels, measured when the rating happens (a percent target on the bound x/y motion values
+    // does not animate from a px start)
+    const fly = useCallback((dir: Dir) => {
+        const w = stageRef.current?.clientWidth ?? 320; const h = w / 0.68;
+        return { left: { x: -w * 1.8, y: 0 }, right: { x: w * 1.8, y: 0 }, up: { x: 0, y: -h * 1.3 }, down: { x: 0, y: h * 1.3 } }[dir];
+    }, []);
+
     const rate = useCallback((r: Rating) => {
         if (!current || leaving || flipping) return;
         const dir = DIR[r];
-        setLeaving({ id: current.id, dir }); setPreview(dir);
+        setLeaving({ id: current.id, dir, to: fly(dir) }); setPreview(dir);
         setEnergy((e) => Math.max(0, e - 1));
         const strong = r === 'good' || r === 'easy';
         const nextRun = strong ? run + 1 : 0; setRun(nextRun);
@@ -98,8 +105,8 @@ export function Lesson({ t, compact = false }: Props) {
             reset();
             if (index + 1 >= cards.length) { setDone(true); window.setTimeout(() => kips.current?.sessionComplete(missed.length === 0 && strong), 200); }
             else setIndex((i) => i + 1);
-        }, reduced ? 0 : 440);
-    }, [current, leaving, flipping, run, index, cards.length, reduced, reset, missed.length]);
+        }, reduced ? 0 : 540);
+    }, [current, leaving, flipping, run, index, cards.length, reduced, reset, missed.length, fly]);
 
     const onDrag = (_: unknown, info: PanInfo) => {
         const c = cutoff(); const { x, y } = info.offset;
@@ -125,7 +132,6 @@ export function Lesson({ t, compact = false }: Props) {
     }, [flip, rate, done]);
 
     const restart = () => { setIndex(0); setEnergy(25); setRun(0); setMissed([]); setDone(false); reset(); };
-    const fly = (dir: Dir) => ({ left: { x: '-160%' }, right: { x: '160%' }, up: { y: '-140%' }, down: { y: '140%' } }[dir]);
     const r = t.demo;
 
     if (done) {
@@ -187,10 +193,10 @@ export function Lesson({ t, compact = false }: Props) {
                                     whileDrag={{ cursor: 'grabbing' }}
                                     initial={{ scale: st.scale, x: st.x, y: st.y, rotate: st.rotate }}
                                     animate={isLeaving
-                                        ? { ...fly(leaving!.dir), rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.42, ease: [0.3, 0.7, 0.4, 1] } }
+                                        ? { ...leaving!.to, rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.5, ease: [0.3, 0.7, 0.4, 1] } }
                                         : isFront ? { scale: 1, transition: { type: 'spring', stiffness: 320, damping: 30 } }
                                         : { scale: st.scale, x: st.x, y: st.y, rotate: st.rotate, transition: { type: 'spring', stiffness: 320, damping: 30 } }}
-                                    exit={{ opacity: 0, transition: { duration: 0 } }}
+                                    exit={{ opacity: 0, transition: { duration: 0.08 } }}
                                 >
                                     <button type="button" className="ls-card__hit" onClick={isFront ? flip : undefined} tabIndex={isFront ? 0 : -1}
                                         aria-label={isFront ? (showBack ? `${card.word}: ${card.meaning}` : `${card.word}. ${r.tapToReveal}`) : undefined}>

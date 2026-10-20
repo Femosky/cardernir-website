@@ -188,7 +188,7 @@
 
 /* the streak candle, live from the Rive file: a big canvas, clipped to the candle */
 .candle { position: relative; width: 440px; height: 480px; }
-.candle__win { position: absolute; inset: 0; overflow: hidden; }
+.candle__win { position: absolute; inset: 0; }
 .streak-hero { position: absolute; left: 50%; top: 50%; translate: -50% calc(-50% - 30px); }
 .streak-hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .chapter--tight { gap: 28px; }
