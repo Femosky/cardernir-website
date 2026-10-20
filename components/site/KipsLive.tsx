@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Kips, type KipsHandle } from '@/components/landing/Kips';
 
-type Props = { celebrate?: boolean; size?: number; interactive?: boolean };
+type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?: boolean };
 
 /** Kips on a marketing stage: idling, reacting once when he scrolls into view, and, when interactive, on every tap. */
-export function KipsLive({ celebrate = false, size = 360, interactive = false }: Props) {
+export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false }: Props) {
     const kips = useRef<KipsHandle>(null);
     const taps = useRef(0);
     const poke = () => {
@@ -19,7 +19,7 @@ export function KipsLive({ celebrate = false, size = 360, interactive = false }:
         <motion.div
             className="kips-live"
             data-interactive={interactive || undefined}
-            onViewportEnter={() => (celebrate ? kips.current?.sessionComplete(true) : kips.current?.correct())}
+            onViewportEnter={() => { if (quiet) return; if (celebrate) kips.current?.sessionComplete(true); else kips.current?.correct(); }}
             viewport={{ amount: 0.6, once: true }}
             onClick={interactive ? poke : undefined}
             whileTap={interactive ? { scale: 0.96 } : undefined}

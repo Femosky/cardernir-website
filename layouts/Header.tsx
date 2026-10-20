@@ -14,7 +14,7 @@ export function Header({ locale, t }: { locale: LocaleCode; t: Dictionary }) {
                 </Link>
                 <div className="hd__links">
                     <Link className="hd__link" href="/support">{t.nav.support}</Link>
-                    <Link className="btn3d btn3d--sm" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">{t.nav.download}</Link>
+                    <Link className="btn" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">{t.nav.download}</Link>
                 </div>
             </nav>
         </header>
