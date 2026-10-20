@@ -41,7 +41,7 @@
 .hero__demo { width: min(100%, 520px); margin-top: 48px; }
 
 /* the lesson, as its own chapter: the hero's ground dips into it */
-.try { --sky: #e8eeff; position: relative; background: var(--sky); padding: 72px 0 48px; scroll-margin-top: 76px; }
+.try { --sky: #e8eeff; position: relative; background: var(--sky); padding: 72px 0 48px; }
 .dark .try { --sky: #141a33; }
 .try .lesson { --stack-w: min(360px, max(250px, calc((100svh - 560px) * 0.68))); }
 .try .lesson--done { min-height: min(700px, calc(100svh - 300px)); }
@@ -283,7 +283,7 @@
     .kips-stage .kips { width: min(100%, 320px) !important; height: auto !important; aspect-ratio: 1; }
     .closing__kips .kips { width: min(100%, 260px) !important; height: auto !important; aspect-ratio: 1; }
     /* the lesson chapter fits a phone screen: smaller title, no keyboard hint, the card sized to the viewport */
-    .try { padding: 36px 0 24px; scroll-margin-top: 64px; }
+    .try { padding: 36px 0 24px; }
     .try__title { font-size: 26px; line-height: 1.05; }
     .try__hint { display: none; }
     .try .hero__demo { margin-top: 18px; }

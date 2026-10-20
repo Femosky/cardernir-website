@@ -93,7 +93,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 96px;
+    scroll-padding-top: 76px;
 }
 
 body {
@@ -1111,7 +1111,7 @@ svg {
 
 @media (max-width: 900px) {
     html {
-        scroll-padding-top: 84px;
+        scroll-padding-top: 64px;
     }
 
     .site-header {
