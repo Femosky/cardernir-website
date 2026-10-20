@@ -19,7 +19,8 @@ export type KipsHandle = {
 
 type KipsProps = {
     className?: string;
-    /** Static art shown until the runtime is ready (and always, under reduced motion). */
+    /** Kept for call sites; the still shown until the runtime is ready is always the artboard's own rest capture,
+     *  which has the runtime's exact framing (the character-sheet stills are cropped tighter and jumped in size). */
     poster?: 'hello_wave' | 'happy_joy' | 'excited_open' | 'neutral' | 'cheer_arms_up';
     size?: number;
     priority?: boolean;
@@ -32,7 +33,7 @@ type KipsProps = {
 const SETTLE_MS = 450;
 
 export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
-    { className, poster = 'neutral', size = 360, priority = false, onReady, intro },
+    { className, size = 360, priority = false, onReady, intro },
     ref,
 ) {
     const reducedMotion = useReducedMotion();
@@ -97,7 +98,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             {!reducedMotion && <RiveComponent className="kips__canvas" style={{ visibility: ready ? 'visible' : 'hidden' }} />}
             <Image
                 className="kips__poster"
-                src={`/kips/${poster}.webp`}
+                src="/kips/rest.webp"
                 alt=""
                 width={size}
                 height={size}

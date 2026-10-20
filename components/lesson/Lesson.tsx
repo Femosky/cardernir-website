@@ -108,7 +108,7 @@ export function Lesson({ t, compact = false }: Props) {
             reset();
             if (index + 1 >= cards.length) { setDone(true); window.setTimeout(() => kips.current?.sessionComplete(missed.length === 0 && strong), 200); }
             else setIndex((i) => i + 1);
-        }, reduced ? 0 : 660);
+        }, reduced ? 0 : 430);
     }, [current, leaving, flipping, run, index, cards.length, reduced, reset, missed.length, fly]);
 
     const onDrag = (_: unknown, info: PanInfo) => {
@@ -196,7 +196,7 @@ export function Lesson({ t, compact = false }: Props) {
                                     whileDrag={{ cursor: 'grabbing' }}
                                     initial={{ scale: st.scale, x: st.x, y: st.y, rotate: st.rotate }}
                                     animate={isLeaving
-                                        ? { ...leaving!.to, rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.62, ease: [0.45, 0, 0.75, 0.55] } }
+                                        ? { ...leaving!.to, rotate: leaving!.dir === 'left' ? -8 : leaving!.dir === 'right' ? 8 : 0, transition: { duration: reduced ? 0 : 0.4, ease: [0.2, 0.75, 0.3, 1] } }
                                         : isFront ? { scale: 1, transition: { type: 'spring', stiffness: 320, damping: 30 } }
                                         : { scale: st.scale, x: st.x, y: st.y, rotate: st.rotate, transition: { type: 'spring', stiffness: 320, damping: 30 } }}
                                     exit={{ opacity: 0, transition: { duration: 0.08 } }}
