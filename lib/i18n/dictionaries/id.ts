@@ -9,6 +9,8 @@ export const id: Dictionary = {
         cta: 'Unduh di App Store',
         note: 'Gratis · iPhone · Tanpa akun',
         tryHint: 'Ketuk kartu untuk membukanya, lalu nilai dirimu sendiri.',
+        tryButton: 'Coba pelajaran',
+        tryTitle: 'Coba satu pelajaran, di sini.',
     },
     demo: {
         newCard: 'Kartu baru',
@@ -50,6 +52,7 @@ export const id: Dictionary = {
         ],
         closing: 'Itulah sebabnya kami memilih pengulangan berjarak daripada latihan tanpa henti, dan mengapa sedikit setiap hari mengalahkan banyak seminggu sekali.',
         curveCaption: 'Setiap jawaban mengubah interval berikutnya. Kalender tetap tidak.',
+        curve: { remembered: 'Diingat', forgotten: 'Terlupa', review: 'Ulasan' },
     },
     streak: {
         kicker: 'Runtunan',

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ElephantMark } from '@/components/ElephantMark';
 import { APP_STORE_URL } from '@/lib/siteMetadata';
+import { LanguageSelect } from '@/components/site/LanguageSelect';
 import { homePath, type LocaleCode } from '@/lib/i18n/locales';
 import type { Dictionary } from '@/lib/i18n';
 
@@ -13,6 +14,7 @@ export function Header({ locale, t }: { locale: LocaleCode; t: Dictionary }) {
                     <span>Cardernir</span>
                 </Link>
                 <div className="hd__links">
+                    <LanguageSelect locale={locale} label={t.footer.language} tone="light" />
                     <Link className="hd__link" href="/support">{t.nav.support}</Link>
                     <Link className="btn" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">{t.nav.download}</Link>
                 </div>

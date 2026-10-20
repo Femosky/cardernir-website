@@ -9,6 +9,8 @@ export const ptBR: Dictionary = {
         cta: 'Baixar na App Store',
         note: 'Grátis · iPhone · Sem conta',
         tryHint: 'Toque no cartão para revelá-lo e depois avalie você mesmo.',
+        tryButton: 'Experimentar uma lição',
+        tryTitle: 'Experimente uma lição, aqui mesmo.',
     },
     demo: {
         newCard: 'Cartão novo',
@@ -50,6 +52,7 @@ export const ptBR: Dictionary = {
         ],
         closing: 'É por isso que escolhemos repetição espaçada em vez de decoreba sem fim, e por isso um pouco todo dia vale mais do que muito uma vez por semana.',
         curveCaption: 'Cada resposta muda o próximo intervalo. Um calendário fixo, não.',
+        curve: { remembered: 'Lembrado', forgotten: 'Esquecido', review: 'Revisão' },
     },
     streak: {
         kicker: 'Sequências',

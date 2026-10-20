@@ -9,6 +9,8 @@ export const de: Dictionary = {
         cta: 'Im App Store laden',
         note: 'Kostenlos · iPhone · Kein Konto',
         tryHint: 'Tippe auf die Karte, um sie umzudrehen, und bewerte dich dann selbst.',
+        tryButton: 'Lektion ausprobieren',
+        tryTitle: 'Probier eine Lektion, gleich hier.',
     },
     demo: {
         newCard: 'Neue Karte',
@@ -50,6 +52,7 @@ export const de: Dictionary = {
         ],
         closing: 'Deshalb haben wir uns für Spaced Repetition statt endlosem Pauken entschieden, und deshalb schlägt ein bisschen jeden Tag viel auf einmal pro Woche.',
         curveCaption: 'Jede Antwort verändert das nächste Intervall. Ein fester Kalender tut das nicht.',
+        curve: { remembered: 'Gemerkt', forgotten: 'Vergessen', review: 'Wiederholung' },
     },
     streak: {
         kicker: 'Serien',

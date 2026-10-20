@@ -9,6 +9,8 @@ export const zhHans: Dictionary = {
         cta: '在 App Store 下载',
         note: '免费 · iPhone · 无需账户',
         tryHint: '点击卡片翻面，然后给自己打分。',
+        tryButton: '试一节课',
+        tryTitle: '就在这里试一节课。',
     },
     demo: {
         newCard: '新卡片',
@@ -50,6 +52,7 @@ export const zhHans: Dictionary = {
         ],
         closing: '所以我们选择了间隔重复，而不是无休止的刷题；也正因如此，每天一点点胜过一周一大堆。',
         curveCaption: '每次回答都会改变下一次的间隔。固定日程做不到这一点。',
+        curve: { remembered: '记得', forgotten: '忘了', review: '复习' },
     },
     streak: {
         kicker: '连胜',

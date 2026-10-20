@@ -9,6 +9,8 @@ export const it: Dictionary = {
         cta: 'Scarica su App Store',
         note: 'Gratis · iPhone · Senza account',
         tryHint: 'Tocca la carta per girarla, poi valutati.',
+        tryButton: 'Prova una lezione',
+        tryTitle: 'Prova una lezione, proprio qui.',
     },
     demo: {
         newCard: 'Nuova carta',
@@ -50,6 +52,7 @@ export const it: Dictionary = {
         ],
         closing: 'Per questo abbiamo scelto la ripetizione dilazionata invece del ripasso senza fine, e per questo un po’ ogni giorno batte tanto una volta a settimana.',
         curveCaption: 'Ogni risposta cambia l’intervallo successivo. Un calendario fisso no.',
+        curve: { remembered: 'Ricordato', forgotten: 'Dimenticato', review: 'Ripasso' },
     },
     streak: {
         kicker: 'Serie',

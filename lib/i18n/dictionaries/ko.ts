@@ -9,6 +9,8 @@ export const ko: Dictionary = {
         cta: 'App Store에서 다운로드',
         note: '무료 · iPhone · 계정 불필요',
         tryHint: '카드를 탭해 뒤집은 다음 스스로 평가하세요.',
+        tryButton: '레슨 체험하기',
+        tryTitle: '여기서 레슨을 체험해 보세요.',
     },
     demo: {
         newCard: '새 카드',
@@ -50,6 +52,7 @@ export const ko: Dictionary = {
         ],
         closing: '그래서 우리는 끝없는 반복 대신 간격 반복을 택했고, 일주일에 한 번 몰아서 하는 것보다 매일 조금씩이 더 낫다고 믿습니다.',
         curveCaption: '답할 때마다 다음 간격이 바뀝니다. 고정된 달력은 그렇지 않습니다.',
+        curve: { remembered: '기억함', forgotten: '잊음', review: '복습' },
     },
     streak: {
         kicker: '연속 기록',

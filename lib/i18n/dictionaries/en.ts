@@ -7,6 +7,8 @@ export const en = {
         cta: 'Download on the App Store',
         note: 'Free · iPhone · No account',
         tryHint: 'Tap the card to reveal it, then rate yourself.',
+        tryButton: 'Try a lesson',
+        tryTitle: 'Try a lesson, right here.',
     },
     demo: {
         newCard: 'New card',
@@ -48,6 +50,7 @@ export const en = {
         ],
         closing: 'That is why we chose spaced repetition over endless drilling, and why a little every day beats a lot once a week.',
         curveCaption: 'Each answer changes the next interval. A fixed calendar does not.',
+        curve: { remembered: 'Remembered', forgotten: 'Forgotten', review: 'Review' },
     },
     streak: {
         kicker: 'Streaks',

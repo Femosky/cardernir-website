@@ -8,6 +8,8 @@ import { APP_STORE_URL } from '@/lib/siteMetadata';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Dictionary } from '@/lib/i18n';
 
+const CLOSING_TIMELINE = ['SessionPerfect', 'Idle'];
+
 function Lines({ text }: { text: string }) {
     const parts = text.split('\n');
     return <>{parts.map((p, i) => (<span key={i}>{p}{i < parts.length - 1 && <br />}</span>))}</>;
@@ -27,10 +29,23 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
     return (
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
-                <div className="shell hero__inner">
-                    <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
-                    <p className="lede hero__lede">{t.hero.body}</p>
-                    <div className="hero__cta"><Badge label={t.hero.cta} /><span className="hero__note">{t.hero.note}</span></div>
+                <div className="shell hero__grid">
+                    <div className="hero__kips"><KipsLive quiet poster="hello_wave" size={440} /></div>
+                    <div className="hero__copy">
+                        <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
+                        <p className="lede">{t.hero.body}</p>
+                        <div className="hero__actions">
+                            <a className="btn btn--lg" href="#try">{t.hero.tryButton}</a>
+                            <Badge label={t.hero.cta} />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="try" className="block try" aria-labelledby="try-title">
+                <div className="shell try__inner">
+                    <h2 id="try-title" className="try__title">{t.hero.tryTitle}</h2>
+                    <p className="try__hint">{t.hero.tryHint}</p>
                     <div className="hero__demo"><Lesson t={t} /></div>
                 </div>
             </section>
@@ -41,7 +56,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                         <h2 id="learn-title"><Lines text={t.science.title} /></h2>
                         <p className="lede">{t.science.body}</p>
                     </Reveal>
-                    <div className="chapter__art"><ForgetCurve /></div>
+                    <div className="chapter__art"><ForgetCurve labels={t.science.curve} /></div>
                 </div>
             </section>
 
@@ -85,7 +100,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                 </div>
             </section>
 
-            <section className="block block--paper" aria-labelledby="ready-title">
+            <section className="block block--lilac" aria-labelledby="ready-title">
                 <div className="shell chapter">
                     <Reveal className="chapter__copy">
                         <h2 id="ready-title">{t.ready.title}</h2>
@@ -113,7 +128,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             <section className="closing" aria-labelledby="closing-title">
                 <svg className="closing__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 C 240 0 480 0 720 60 C 960 120 1200 120 1440 40 L1440 120 L0 120 Z" /></svg>
                 <div className="shell closing__inner">
-                    <div className="closing__kips"><KipsLive quiet size={300} /></div>
+                    <div className="closing__kips"><KipsLive timeline={CLOSING_TIMELINE} poster="cheer_arms_up" size={300} /></div>
                     <h2 id="closing-title"><Lines text={t.closing.title} /></h2>
                     <p>{t.closing.body}</p>
                     <Badge label={t.hero.cta} />

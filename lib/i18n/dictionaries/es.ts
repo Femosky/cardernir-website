@@ -9,6 +9,8 @@ export const es: Dictionary = {
         cta: 'Descargar en el App Store',
         note: 'Gratis · iPhone · Sin cuenta',
         tryHint: 'Toca la tarjeta para revelarla y luego califícate.',
+        tryButton: 'Probar una lección',
+        tryTitle: 'Prueba una lección, aquí mismo.',
     },
     demo: {
         newCard: 'Tarjeta nueva',
@@ -50,6 +52,7 @@ export const es: Dictionary = {
         ],
         closing: 'Por eso elegimos la repetición espaciada en lugar de memorizar sin fin, y por eso un poco cada día vale más que mucho una vez a la semana.',
         curveCaption: 'Cada respuesta cambia el siguiente intervalo. Un calendario fijo no lo hace.',
+        curve: { remembered: 'Recordado', forgotten: 'Olvidado', review: 'Repaso' },
     },
     streak: {
         kicker: 'Rachas',

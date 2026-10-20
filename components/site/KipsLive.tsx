@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { Kips, type KipsHandle } from '@/components/landing/Kips';
 
-type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?: boolean };
+type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?: boolean; timeline?: string[]; poster?: 'hello_wave' | 'happy_joy' | 'excited_open' | 'neutral' | 'cheer_arms_up' };
 
 /** Kips on a marketing stage: idling, reacting once when he scrolls into view, and, when interactive, on every tap. */
-export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false }: Props) {
+export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false, timeline, poster }: Props) {
     const kips = useRef<KipsHandle>(null);
     const taps = useRef(0);
     const poke = () => {
@@ -19,7 +19,7 @@ export function KipsLive({ celebrate = false, size = 360, interactive = false, q
         <motion.div
             className="kips-live"
             data-interactive={interactive || undefined}
-            onViewportEnter={() => { if (quiet) return; if (celebrate) kips.current?.sessionComplete(true); else kips.current?.correct(); }}
+            onViewportEnter={() => { if (quiet || timeline) return; if (celebrate) kips.current?.sessionComplete(true); else kips.current?.correct(); }}
             viewport={{ amount: 0.6, once: true }}
             onClick={interactive ? poke : undefined}
             whileTap={interactive ? { scale: 0.96 } : undefined}
@@ -27,7 +27,7 @@ export function KipsLive({ celebrate = false, size = 360, interactive = false, q
             tabIndex={interactive ? 0 : undefined}
             onKeyDown={interactive ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(); } } : undefined}
         >
-            <Kips ref={kips} poster={celebrate ? 'cheer_arms_up' : 'neutral'} size={size} />
+            <Kips ref={kips} poster={poster ?? (celebrate ? 'cheer_arms_up' : 'neutral')} size={size} timeline={timeline} />
         </motion.div>
     );
 }

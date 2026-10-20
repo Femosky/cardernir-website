@@ -9,6 +9,8 @@ export const zhHant: Dictionary = {
         cta: '在 App Store 下載',
         note: '免費 · iPhone · 不需帳號',
         tryHint: '點一下卡片翻面，然後替自己評分。',
+        tryButton: '試一堂課',
+        tryTitle: '就在這裡試一堂課。',
     },
     demo: {
         newCard: '新卡片',
@@ -50,6 +52,7 @@ export const zhHant: Dictionary = {
         ],
         closing: '所以我們選擇了間隔重複，而不是無止境的刷題；也正因如此，每天一點點勝過一週一大堆。',
         curveCaption: '每次回答都會改變下一次的間隔。固定行事曆做不到這一點。',
+        curve: { remembered: '記得', forgotten: '忘了', review: '複習' },
     },
     streak: {
         kicker: '連勝',

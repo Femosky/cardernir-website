@@ -2,7 +2,7 @@
 
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import Image from 'next/image';
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, EventType, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
 
 /** Kips, running on the app's own Rive file. The same state machine the app drives. */
@@ -21,11 +21,14 @@ type KipsProps = {
     poster?: 'hello_wave' | 'happy_joy' | 'excited_open' | 'neutral' | 'cheer_arms_up';
     size?: number;
     priority?: boolean;
+    /** Play the file's linear animations in sequence instead of the state machine: each one cuts to the next when it
+     *  stops, and the last one loops. No crossfades. */
+    timeline?: string[];
     onReady?: () => void;
 };
 
 export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
-    { className, poster = 'neutral', size = 360, priority = false, onReady },
+    { className, poster = 'neutral', size = 360, priority = false, onReady, timeline },
     ref,
 ) {
     const reducedMotion = useReducedMotion();
@@ -37,9 +40,8 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             : {
                   src: '/kips/kips.riv',
                   artboard: 'Elephant_v3',
-                  stateMachines: 'ElephantStateMachine',
+                  ...(timeline ? { animations: timeline[0] } : { stateMachines: 'ElephantStateMachine', autoBind: true }),
                   autoplay: true,
-                  autoBind: true,
                   layout: new Layout({ fit: Fit.Contain, alignment: Alignment.BottomCenter }),
                   onLoad: () => {
                       setReady(true);
@@ -81,6 +83,15 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
     );
 
     useEffect(() => () => rive?.cleanup(), [rive]);
+
+    // timeline mode: advance through the list on each Stop, then keep the last one going
+    useEffect(() => {
+        if (!rive || !timeline || timeline.length < 2) return;
+        let i = 0;
+        const onStop = () => { i = Math.min(i + 1, timeline.length - 1); rive.play(timeline[i]); };
+        rive.on(EventType.Stop, onStop);
+        return () => rive.off(EventType.Stop, onStop);
+    }, [rive, timeline]);
 
     return (
         <div className={['kips', className].filter(Boolean).join(' ')} style={{ width: size, height: size }} aria-hidden="true">

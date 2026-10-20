@@ -9,6 +9,8 @@ export const ja: Dictionary = {
         cta: 'App Storeでダウンロード',
         note: '無料 · iPhone · アカウント不要',
         tryHint: 'カードをタップしてめくり、自分の記憶を評価しましょう。',
+        tryButton: 'レッスンを試す',
+        tryTitle: 'ここでレッスンを試してみましょう。',
     },
     demo: {
         newCard: '新しいカード',
@@ -50,6 +52,7 @@ export const ja: Dictionary = {
         ],
         closing: 'だから私たちは果てしない反復練習ではなく間隔反復を選びました。週に1回たくさんより、毎日少しずつの方が効くのです。',
         curveCaption: '回答のたびに次の間隔が変わります。固定のカレンダーでは変わりません。',
+        curve: { remembered: '覚えている', forgotten: '忘れた', review: '復習' },
     },
     streak: {
         kicker: '連続記録',
