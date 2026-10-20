@@ -10,9 +10,11 @@ type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?
 export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false, idle, poster }: Props) {
     const kips = useRef<KipsHandle>(null);
     const taps = useRef(0);
+    const lastTap = useRef(0);
     const poke = () => {
         const k = kips.current; if (!k) return;
-        const seq = [() => k.correct(), () => k.combo(1), () => k.wrong(), () => k.combo(3), () => k.sessionComplete(true)];
+        const now = Date.now(); if (now - lastTap.current < 2600) return; lastTap.current = now;
+        const seq = [() => k.correct(), () => k.wrong(), () => k.hard(), () => k.sessionComplete(false)];
         seq[taps.current++ % seq.length]();
     };
     return (

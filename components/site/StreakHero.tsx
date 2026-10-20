@@ -45,15 +45,22 @@ export function StreakHero({ size = 380 }: { size?: number }) {
     useEffect(() => {
         if (!inView || fired.current || !rive?.viewModelInstance) return;
         fired.current = true;
-        const t = window.setTimeout(() => rive.viewModelInstance?.trigger('streakIncremented')?.trigger(), 900);
+        const t = window.setTimeout(() => {
+            const vm = rive.viewModelInstance; if (!vm) return;
+            vm.trigger('streakIncremented')?.trigger();
+            const day = vm.number('dayProgress'); if (day) day.value = 0; // the day's goal is done: the candle is whole again
+        }, 900);
         return () => window.clearTimeout(t);
     }, [inView, rive, ready]);
 
     useEffect(() => () => rive?.cleanup(), [rive]);
+    useEffect(() => { if (process.env.NODE_ENV !== 'production') (window as unknown as { __streak?: unknown }).__streak = rive; }, [rive]);
 
     return (
-        <div ref={box} className="streak-hero" style={{ width: size, height: size }} aria-hidden="true">
-            {!reduced && <RiveComponent className="streak-hero__canvas" style={{ visibility: ready ? 'visible' : 'hidden' }} />}
+        <div ref={box} className="candle__win" aria-hidden="true">
+            <div className="streak-hero" style={{ width: size, height: size }}>
+                {!reduced && <RiveComponent className="streak-hero__canvas" style={{ visibility: ready ? 'visible' : 'hidden' }} />}
+            </div>
         </div>
     );
 }

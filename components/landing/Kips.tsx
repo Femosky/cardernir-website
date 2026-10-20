@@ -29,8 +29,9 @@ type KipsProps = {
 };
 
 const IDLE = 'Idle';
-/** Longest an emote may hold before Idle is forced back (covers moods that loop). */
-const EMOTE_MAX_MS = 3600;
+/** A safety net: one-shots end on their own; a looping mood (Worried) is cut after its hold. */
+const HOLD_MS: Record<string, number> = { Worried: 1800 };
+const HOLD_DEFAULT_MS = 9000;
 
 export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
     { className, poster = 'neutral', size = 360, priority = false, onReady, idle = IDLE },
@@ -69,7 +70,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             if (timer.current) window.clearTimeout(timer.current);
             timer.current = window.setTimeout(() => {
                 if (rive.playingAnimationNames.includes(name)) { switching.current = true; rive.stop(); rive.play(idle); switching.current = false; }
-            }, EMOTE_MAX_MS);
+            }, HOLD_MS[name] ?? HOLD_DEFAULT_MS);
         },
         [rive, idle],
     );

@@ -29,7 +29,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
                 <div className="shell hero__grid">
-                    <div className="hero__kips"><KipsLive quiet idle="Happy" poster="hello_wave" size={440} /></div>
+                    <div className="hero__kips"><Image className="hero__wave" src="/kips/hello_wave.webp" alt="" width={440} height={440} priority sizes="(max-width: 700px) 300px, 440px" /></div>
                     <div className="hero__copy">
                         <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
                         <p className="lede">{t.hero.body}</p>
@@ -60,17 +60,16 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             </section>
 
             <section id="streak" className="block block--warm" aria-labelledby="streak-title">
-                <div className="shell split">
+                <div className="shell chapter chapter--tight">
                     <div className="candle">
                         <span className="candle__glow" aria-hidden="true" />
-                        <StreakHero />
+                        <StreakHero size={640} />
                     </div>
-                    <Reveal className="split__copy">
+                    <Reveal className="chapter__copy">
                         <h2 id="streak-title">{t.streak.title}</h2>
                         <p className="lede">{t.streak.body}</p>
                     </Reveal>
                 </div>
-                <svg className="wax" viewBox="0 0 1440 80" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><path d="M0 0 H1440 V6 H1259 C 1259 31 1256 52 1240 52 C 1224 52 1221 31 1221 6 H994 C 994 27 992 44 980 44 C 968 44 966 27 966 6 H723 C 723 37 719 62 700 62 C 681 62 677 37 677 6 H435 C 435 22 433 36 420 36 C 407 36 405 22 405 6 H190 C 190 35 187 58 170 58 C 153 58 150 35 150 6 H0 Z" /></svg>
             </section>
 
             <section id="decks" className="block block--cyan" aria-labelledby="free-title">
@@ -127,7 +126,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             <section className="closing" aria-labelledby="closing-title">
                 <svg className="closing__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 C 240 0 480 0 720 60 C 960 120 1200 120 1440 40 L1440 120 L0 120 Z" /></svg>
                 <div className="shell closing__inner">
-                    <div className="closing__kips"><KipsLive celebrate size={300} /></div>
+                    <div className="closing__kips"><KipsLive size={300} /></div>
                     <h2 id="closing-title"><Lines text={t.closing.title} /></h2>
                     <p>{t.closing.body}</p>
                     <Badge label={t.hero.cta} />
