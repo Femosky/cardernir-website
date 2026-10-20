@@ -5,7 +5,7 @@ export const fr: Dictionary = {
     nav: { learn: 'Comment ça marche', streaks: 'Séries', decks: 'Paquets', kips: 'Kips', support: 'Assistance', download: 'Télécharger' },
     hero: {
         title: 'Des mots français.\nPour longtemps.',
-        body: 'Cardernir est une appli gratuite de cartes de vocabulaire français, avec un compagnon d’étude, Kips, qui vous ramène chaque mot juste avant que vous l’oubliiez. Essayez une leçon, ici même.',
+        body: 'Une appli gratuite de cartes de vocabulaire français, avec Kips, un compagnon d’étude qui vous ramène chaque mot juste avant que vous l’oubliiez. Essayez une leçon.',
         cta: 'Télécharger dans l’App Store',
         note: 'Gratuit · iPhone · Sans compte',
         tryHint: 'Touchez la carte pour la retourner, puis évaluez-vous.',
@@ -41,8 +41,8 @@ export const fr: Dictionary = {
     ],
     science: {
         kicker: 'Pourquoi la répétition espacée',
-        title: 'Apprendre un mot est facile.\nLe garder, c’est le vrai travail.',
-        body: 'La mémoire s’efface selon une courbe. Révisez un mot juste avant qu’il s’échappe et la courbe s’aplatit ; trop tôt, l’effort est perdu ; trop tard, on repart de zéro. Le mode Apprendre de Cardernir repose sur cette seule idée.',
+        title: 'Il revient\njuste avant l’oubli.',
+        body: 'La mémoire s’efface selon une courbe. Le mode Apprendre, programmé par FSRS, révise chaque mot juste avant qu’il s’échappe. Un peu chaque jour vaut mieux que beaucoup une fois par semaine.',
         steps: [
             { title: 'Quelques mots nouveaux par jour', body: 'Kips les choisit dans votre paquet, au rythme que vous avez fixé.' },
             { title: 'Vous évaluez votre souvenir', body: 'Encore, Difficile, Bien ou Facile. C’est la seule information dont le système a besoin.' },
@@ -54,7 +54,7 @@ export const fr: Dictionary = {
     streak: {
         kicker: 'Séries',
         title: 'Gardez la bougie allumée.',
-        body: 'La répétition espacée ne fonctionne que si vous revenez. Votre série est donc une bougie qui se consume au fil de la journée. Une courte session la garde allumée. Kips fête chaque palier, et le widget garde la flamme sous vos yeux.',
+        body: 'Votre série est une bougie qui se consume au fil de la journée. Une courte session la garde allumée, et Kips fête chaque palier.',
         points: ['Des widgets, avec un petit rappel avant qu’elle s’éteigne', 'Des rappels à votre heure, ou aucun', 'Des paliers à 7, 30, 100 et 365 jours'],
     },
     modes: {
@@ -66,13 +66,13 @@ export const fr: Dictionary = {
     free: {
         kicker: 'Gratuit, avec de l’Énergie',
         title: 'Tous les paquets sont gratuits.',
-        body: 'Les nouveaux mots coûtent de l’Énergie, qui se recharge seule ; une courte pub permet aussi de faire le plein. Cinq bonnes réponses d’affilée et Kips empile un combo qui regagne l’Énergie dépensée. Premium retire les pubs et la limite.',
+        body: 'Les nouveaux mots coûtent de l’Énergie, qui se recharge seule. Cinq bonnes réponses d’affilée et Kips la regagne. Premium retire les pubs et la limite.',
         facts: [['25', 'd’Énergie, rechargée chaque heure'], ['×5', 'd’affilée regagne de l’Énergie'], ['∞', 'avec Premium, sans pub']],
     },
     kips: {
         kicker: 'Voici Kips',
         title: 'Un compagnon, pas un coach.',
-        body: 'Kips étudie à vos côtés. Il applaudit une bonne réponse, grimace à une mauvaise, fait la fête pour un combo et garde votre bougie allumée. Il ne harcèle jamais, et ne demande jamais votre e-mail.',
+        body: 'Kips applaudit une bonne réponse, grimace à une mauvaise et fait la fête pour un combo. Il ne harcèle jamais. Touchez-le.',
     },
     languages: {
         kicker: 'Les sens dans votre langue',
@@ -93,7 +93,7 @@ export const fr: Dictionary = {
     ready: {
         kicker: 'Rien à construire',
         title: 'Les cartes sont déjà écrites.',
-        body: 'Cardernir n’est pas un outil à paquets vides. 3 850 cartes de français, chacune avec un sens vérifié, une description et des phrases d’exemple, sont dans l’appli dès le premier jour. Rien à importer, rien à mettre en forme, rien à taper. Ouvrez-la et apprenez.',
+        body: '3 850 cartes de français avec sens, descriptions et exemples en 12 langues, dans l’appli dès le premier jour. Rien à importer, rien à taper. Ouvrez-la et apprenez.',
         compare: ['Livrée avec 3 850 cartes de français', 'Sens, description et exemples sur chaque carte', 'Répétition espacée réglée par FSRS, sans réglages à apprendre', 'Gratuite, avec de l’Énergie ; Premium pour l’illimité'],
     },
     faq: {

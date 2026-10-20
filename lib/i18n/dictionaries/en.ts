@@ -3,7 +3,7 @@ export const en = {
     nav: { learn: 'How it works', streaks: 'Streaks', decks: 'Decks', kips: 'Kips', support: 'Support', download: 'Download' },
     hero: {
         title: 'French words.\nYours to keep.',
-        body: 'Cardernir is a free French flashcard app with a study companion, Kips, who brings every word back right before you forget it. Try a lesson, right here.',
+        body: 'A free French flashcard app with Kips, a study companion who brings every word back right before you forget it. Try a lesson.',
         cta: 'Download on the App Store',
         note: 'Free · iPhone · No account',
         tryHint: 'Tap the card to reveal it, then rate yourself.',
@@ -39,8 +39,8 @@ export const en = {
     ],
     science: {
         kicker: 'Why spaced repetition',
-        title: 'Learning a word is easy.\nKeeping it is the hard part.',
-        body: 'Memory fades on a curve. Review a word just before it slips and the curve flattens; review it too early and you waste the effort, too late and you start over. Cardernir’s Learn mode is built on this one idea.',
+        title: 'It comes back\nright before you forget.',
+        body: 'Memory fades on a curve. Learn mode, scheduled by FSRS, reviews each word just before it slips. A little every day beats a lot once a week.',
         steps: [
             { title: 'A few new words a day', body: 'Kips picks them from your deck at the pace you chose.' },
             { title: 'You rate your recall', body: 'Again, Hard, Good or Easy. That is the only input the system needs.' },
@@ -52,7 +52,7 @@ export const en = {
     streak: {
         kicker: 'Streaks',
         title: 'Keep the candle lit.',
-        body: 'Spaced repetition only works if you show up, so your streak is a candle that burns down through the day. A short session keeps it lit. Kips celebrates every milestone, and the Home Screen widget keeps the flame in sight.',
+        body: 'Your streak is a candle that burns down through the day. One short session keeps it lit, and Kips celebrates every milestone.',
         points: ['Widgets with a gentle nudge before it burns out', 'Reminders at your practice time, or none at all', 'Milestones at 7, 30, 100 and 365 days'],
     },
     modes: {
@@ -63,14 +63,14 @@ export const en = {
     },
     free: {
         kicker: 'Free, with Energy',
-        title: 'Every deck is free to study.',
-        body: 'New words use Energy, which refills on its own, or you can watch a short ad to top up. Answer five in a row and Kips stacks a combo that wins back the Energy you spent. Premium removes ads and the limit.',
+        title: 'Every deck is free.',
+        body: 'New words use Energy, which refills on its own. Answer five in a row and Kips wins it back. Premium removes ads and the limit.',
         facts: [['25', 'Energy, refilling every hour'], ['×5', 'in a row wins Energy back'], ['∞', 'with Premium, no ads']],
     },
     kips: {
         kicker: 'Meet Kips',
         title: 'A companion, not a coach.',
-        body: 'Kips studies beside you. He cheers a right answer, winces at a wrong one, throws a small party for a combo, and keeps your candle lit. He never nags, and he never asks for your email.',
+        body: 'Kips cheers a right answer, winces at a wrong one, and throws a small party for a combo. He never nags. Tap him.',
     },
     languages: {
         kicker: 'Meanings in your language',
@@ -91,7 +91,7 @@ export const en = {
     ready: {
         kicker: 'Nothing to build',
         title: 'The cards are already written.',
-        body: 'Cardernir is not a blank-deck tool. 3,850 French cards, each with a verified meaning, a description and example sentences, are in the app on day one. No importing, no formatting, no typing out your own decks. Open it and start learning French.',
+        body: '3,850 French cards with meanings, descriptions and examples in 12 languages, in the app on day one. No importing, no typing. Open it and learn.',
         compare: ['Comes with 3,850 French cards', 'Meanings, descriptions and examples on every card', 'Spaced repetition tuned by FSRS, no settings to learn', 'Free, with Energy; Premium for unlimited'],
     },
     faq: {

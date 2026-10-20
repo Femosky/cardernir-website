@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import './globals.css';
 import './site.css';
 import { Analytics } from '@vercel/analytics/next';
@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { SiteMotion } from '@/components/SiteMotion';
 import { APP_STORE_ID, SITE_NAME, SITE_URL } from '@/lib/siteMetadata';
 
-const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
+const nunito = Nunito({ subsets: ['latin', 'latin-ext', 'vietnamese'], weight: ['600', '700', '800', '900'], display: 'swap', variable: '--font-nunito' });
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
+        <html lang="en" suppressHydrationWarning className={`${nunito.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
                 <SiteMotion />
                 <ThemeProvider>
