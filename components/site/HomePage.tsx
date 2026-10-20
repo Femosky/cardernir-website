@@ -3,12 +3,11 @@ import Link from 'next/link';
 import { Lesson } from '@/components/lesson/Lesson';
 import { KipsLive } from '@/components/site/KipsLive';
 import { ForgetCurve } from '@/components/site/ForgetCurve';
+import { StreakHero } from '@/components/site/StreakHero';
 import { Reveal } from '@/components/HomeMotion';
 import { APP_STORE_URL } from '@/lib/siteMetadata';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Dictionary } from '@/lib/i18n';
-
-const CLOSING_TIMELINE = ['SessionPerfect', 'Idle'];
 
 function Lines({ text }: { text: string }) {
     const parts = text.split('\n');
@@ -30,7 +29,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
         <main className="site" data-locale={locale}>
             <section className="hero" aria-labelledby="hero-title">
                 <div className="shell hero__grid">
-                    <div className="hero__kips"><KipsLive quiet poster="hello_wave" size={440} /></div>
+                    <div className="hero__kips"><KipsLive quiet idle="Happy" poster="hello_wave" size={440} /></div>
                     <div className="hero__copy">
                         <h1 id="hero-title" className="hero__title"><Lines text={t.hero.title} /></h1>
                         <p className="lede">{t.hero.body}</p>
@@ -42,7 +41,8 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                 </div>
             </section>
 
-            <section id="try" className="block try" aria-labelledby="try-title">
+            <section id="try" className="try" aria-labelledby="try-title">
+                <svg className="try__hills" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H1440 V28 C 1240 28 1080 140 720 140 C 360 140 200 28 0 28 Z" /></svg>
                 <div className="shell try__inner">
                     <h2 id="try-title" className="try__title">{t.hero.tryTitle}</h2>
                     <p className="try__hint">{t.hero.tryHint}</p>
@@ -62,11 +62,10 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
 
             <section id="streak" className="block block--warm" aria-labelledby="streak-title">
                 <div className="shell split">
-                    <Reveal className="candle">
+                    <div className="candle">
                         <span className="candle__glow" aria-hidden="true" />
-                        <Image className="candle__img" src="/ui/candle-large.png" alt="" width={339} height={720} sizes="260px" />
-                        <ul className="week" aria-hidden="true">{Array.from({ length: 7 }, (_, i) => <li key={i} style={{ animationDelay: `${i * 90}ms` }} />)}</ul>
-                    </Reveal>
+                        <StreakHero />
+                    </div>
                     <Reveal className="split__copy">
                         <h2 id="streak-title">{t.streak.title}</h2>
                         <p className="lede">{t.streak.body}</p>
@@ -100,7 +99,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
                 </div>
             </section>
 
-            <section className="block block--lilac" aria-labelledby="ready-title">
+            <section className="block block--navy" aria-labelledby="ready-title">
                 <div className="shell chapter">
                     <Reveal className="chapter__copy">
                         <h2 id="ready-title">{t.ready.title}</h2>
@@ -128,7 +127,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             <section className="closing" aria-labelledby="closing-title">
                 <svg className="closing__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 C 240 0 480 0 720 60 C 960 120 1200 120 1440 40 L1440 120 L0 120 Z" /></svg>
                 <div className="shell closing__inner">
-                    <div className="closing__kips"><KipsLive timeline={CLOSING_TIMELINE} poster="cheer_arms_up" size={300} /></div>
+                    <div className="closing__kips"><KipsLive celebrate size={300} /></div>
                     <h2 id="closing-title"><Lines text={t.closing.title} /></h2>
                     <p>{t.closing.body}</p>
                     <Badge label={t.hero.cta} />
