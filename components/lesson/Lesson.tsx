@@ -118,6 +118,28 @@ export function Lesson() {
 
     const fly = (dir: Dir) => ({ left: { x: '-150vw' }, right: { x: '150vw' }, up: { y: '-120vh' }, down: { y: '120vh' } }[dir]);
 
+    if (done) {
+        return (
+            <div className="lesson" data-done="true">
+                <motion.div className="lesson__screen ls-done" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 220, damping: 26 }}>
+                    <div className="ls-done__kips"><Kips ref={kips} poster="cheer_arms_up" size={220} priority onReady={() => kips.current?.sessionComplete(true)} /></div>
+                    <p className="ls-done__k">Session complete</p>
+                    <h1>You just learned<br />six French words.</h1>
+                    <p className="ls-done__p">3,844 to go. Kips will bring these six back before you forget them.</p>
+                    <div className="ls-done__stats">
+                        <span><strong>{CARDS.length}</strong>cards</span>
+                        <span><strong>{minutes}</strong>min</span>
+                        <span><strong>{energy}</strong>Energy</span>
+                    </div>
+                    <Link className="ls-cta" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" aria-label="Get Cardernir on the App Store">
+                        <Image src="/download-on-app-store.png" alt="" width={496} height={172} sizes="188px" />
+                    </Link>
+                    <p className="ls-done__fine">Free · iPhone · No account</p>
+                </motion.div>
+            </div>
+        );
+    }
+
     return (
         <div className="lesson" data-done={done}>
             <div className="lesson__screen">
@@ -193,24 +215,6 @@ export function Lesson() {
                             })}
                         </AnimatePresence>
 
-                        <AnimatePresence>
-                            {done && (
-                                <motion.div key="done" className="ls-done" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 220, damping: 26 }}>
-                                    <p className="ls-done__k">Session complete</p>
-                                    <h1>You just learned<br />six French words.</h1>
-                                    <p className="ls-done__p">3,844 to go. Kips will bring these six back before you forget them.</p>
-                                    <div className="ls-done__stats">
-                                        <span><strong>{CARDS.length}</strong>cards</span>
-                                        <span><strong>{minutes}</strong>min</span>
-                                        <span><strong>{energy}</strong>Energy</span>
-                                    </div>
-                                    <Link className="ls-cta" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" aria-label="Get Cardernir on the App Store">
-                                        <Image src="/download-on-app-store.png" alt="" width={496} height={172} sizes="188px" />
-                                    </Link>
-                                    <p className="ls-done__fine">Free · iPhone · No account</p>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
                     </div>
 
                     <AnimatePresence>

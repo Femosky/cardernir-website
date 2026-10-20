@@ -108,7 +108,8 @@
 .ls-hint { text-align: center; font-size: 12px; color: var(--ls-secondary); min-height: 16px; }
 
 /* ---- session complete (SummaryView voice) */
-.ls-done { position: absolute; inset: 0; display: grid; align-content: center; justify-items: center; gap: 14px; text-align: center; padding: 20px; }
+.ls-done { display: grid !important; grid-template-rows: none !important; align-content: center; justify-items: center; gap: 14px; text-align: center; padding: 20px; }
+.ls-done__kips { margin-bottom: -6px; }
 .ls-done__k { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #426bff; }
 .dark .ls-done__k { color: #8fa6ff; }
 .ls-done h1 { font-size: 34px; line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; }
