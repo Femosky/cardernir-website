@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useInView, useReducedMotion } from 'motion/react';
+import { KIPS_RIV } from '@/lib/kips';
 
 /* The app's streak candle, from the same Rive file: the StreakHero mood of the elephant's state machine shows the
    candle with the day's count; `streakIncremented` refuels it and counts up, exactly as the app does at the end of
@@ -21,7 +22,7 @@ export function StreakHero({ size = 380 }: { size?: number }) {
         reduced
             ? null
             : {
-                  src: '/kips/kips.riv',
+                  src: KIPS_RIV,
                   artboard: 'Elephant_v3',
                   stateMachines: 'ElephantStateMachine',
                   autoplay: true,

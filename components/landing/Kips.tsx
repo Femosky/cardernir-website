@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import Image from 'next/image';
 import { Alignment, EventType, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
+import { KIPS_RIV } from '@/lib/kips';
 
 /** Kips, running on the app's own Rive file: the same state machine and data-binding triggers the app drives.
  *  `intro` plays one of the file's linear animations first (the splash wave, say) and then hands over to Idle. */
@@ -42,7 +43,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
         reducedMotion
             ? null
             : {
-                  src: '/kips/kips.riv',
+                  src: KIPS_RIV,
                   artboard: 'Elephant_v3',
                   ...(intro ? { animations: intro } : { stateMachines: 'ElephantStateMachine', autoBind: true }),
                   autoplay: true,
