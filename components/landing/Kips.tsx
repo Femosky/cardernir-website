@@ -4,7 +4,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import Image from 'next/image';
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useReducedMotion } from 'motion/react';
-import { useKipsSource, useNearViewport } from '@/lib/kipsFile';
+import { useKipsSource, useDeferredStart } from '@/lib/kipsFile';
 
 /** Kips, running on the app's own Rive file: the same state machine and data-binding triggers the app drives.
  *  `intro` names a trigger to fire once the machine has settled into Idle (the hero's `heroHello` wave, say); the
@@ -16,6 +16,8 @@ export type KipsHandle = {
     combo: (tier: 1 | 2 | 3 | 4) => void;
     sessionComplete: (perfect?: boolean) => void;
     premium: () => void;
+    /** One of the idle fidgets by index (1 look around, 2 check the time, 3 foot tap, 4 look up, 5 sigh, 6 peek, 7 trunk twirl, 8 yawn). */
+    fidget: (index: number) => void;
 };
 
 type KipsProps = {
@@ -41,8 +43,8 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
     const [ready, setReady] = useState(false);
     const settledAt = useRef(0);
     const box = useRef<HTMLDivElement>(null);
-    // the player is created only near the viewport (the hero, `priority`, at once), from the page's one shared file
-    const near = useNearViewport(box, priority);
+    // the hero (`priority`) is created at once; the others in idle time after load (never on scroll), all from the page's one shared file
+    const near = useDeferredStart(priority);
     const source = useKipsSource();
 
     const { rive, RiveComponent } = useRive(
@@ -100,6 +102,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             combo: (tier) => fire('comboReached', () => { const n = rive?.viewModelInstance?.number('comboTier'); if (n) n.value = tier; }),
             sessionComplete: (perfect = false) => fire('sessionCompleted', () => { const b = rive?.viewModelInstance?.boolean('sessionPerfect'); if (b) b.value = perfect; }),
             premium: () => fire('premiumActivated'),
+            fidget: (index) => fire('fidget', () => { const n = rive?.viewModelInstance?.number('fidgetIndex'); if (n) n.value = index; }),
         }),
         [fire, rive],
     );

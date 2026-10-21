@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, type ReactNode, type RefObject } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { useRiveFile } from '@rive-app/react-canvas';
 import { KIPS_RIV } from '@/lib/kips';
 
@@ -24,17 +24,20 @@ export function useKipsSource(): { riveFile: NonNullable<RiveFileT> } | { src: s
     return file ? { riveFile: file } : null;
 }
 
-/** True once the element comes within `margin` of the viewport (and stays true): players further down the page
- *  are only created when the reader gets near them. `eager` skips the wait (the hero). */
-export function useNearViewport(ref: RefObject<HTMLElement | null>, eager = false, margin = '300px') {
-    const [near, setNear] = useState(eager);
+/** When this player may be created. The hero (`eager`) starts at once; every other player starts in the browser's
+ *  idle time shortly after load, one per idle slot. Never on scroll: creating a player blocks the main thread for
+ *  a moment, and doing that as a section scrolls in delayed its fade-up (the page's appear animation). */
+export function useDeferredStart(eager = false) {
+    const [start, setStart] = useState(eager);
     useEffect(() => {
-        if (near || !ref.current) return;
-        const io = new IntersectionObserver((entries) => {
-            if (entries.some((e) => e.isIntersecting)) { setNear(true); io.disconnect(); }
-        }, { rootMargin: margin });
-        io.observe(ref.current);
-        return () => io.disconnect();
-    }, [near, ref, margin]);
-    return near;
+        if (start) return;
+        const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+        let idle = 0;
+        const t = window.setTimeout(() => {
+            if (w.requestIdleCallback) idle = w.requestIdleCallback(() => setStart(true), { timeout: 3000 });
+            else setStart(true);
+        }, 900);
+        return () => { window.clearTimeout(t); if (idle && w.cancelIdleCallback) w.cancelIdleCallback(idle); };
+    }, [start]);
+    return start;
 }

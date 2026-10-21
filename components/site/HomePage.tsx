@@ -128,7 +128,7 @@ export function HomePage({ t, locale }: { t: Dictionary; locale: LocaleCode }) {
             <section className="closing" aria-labelledby="closing-title">
                 <svg className="closing__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 C 240 0 480 0 720 60 C 960 120 1200 120 1440 40 L1440 120 L0 120 Z" /></svg>
                 <div className="shell closing__inner">
-                    <div className="closing__kips"><KipsLive size={300} /></div>
+                    <div className="closing__kips"><KipsLive size={300} waiting /></div>
                     <h2 id="closing-title"><Lines text={t.closing.title} /></h2>
                     <p>{t.closing.body}</p>
                     <Badge label={t.hero.cta} />
