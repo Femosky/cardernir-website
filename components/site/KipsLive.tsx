@@ -10,11 +10,11 @@ type Props = { celebrate?: boolean; size?: number; interactive?: boolean; quiet?
 export function KipsLive({ celebrate = false, size = 360, interactive = false, quiet = false, waiting = false, intro, poster }: Props) {
     const kips = useRef<KipsHandle>(null);
     const inView = useRef(false);
-    // waiting (the closing, "Kips is waiting"): while on screen he checks the time, then taps his foot, every few seconds
+    // waiting (the closing, "Kips is waiting", above the download button): while on screen he looks down at the button
+    // and waves you over, every 9 s
     useEffect(() => {
         if (!waiting) return;
-        let n = 0;
-        const t = window.setInterval(() => { if (inView.current) kips.current?.fidget(n++ % 2 === 0 ? 2 : 3); }, 6500);
+        const t = window.setInterval(() => { if (inView.current) kips.current?.beckon(); }, 9000);
         return () => window.clearInterval(t);
     }, [waiting]);
     const taps = useRef(0);
@@ -22,14 +22,15 @@ export function KipsLive({ celebrate = false, size = 360, interactive = false, q
     const poke = () => {
         const k = kips.current; if (!k) return;
         const now = Date.now(); if (now - lastTap.current < 2600) return; lastTap.current = now;
-        const seq = [() => k.correct(), () => k.wrong(), () => k.hard(), () => k.sessionComplete(false)];
+        // reactions that end on Idle's own first frame (the lesson-end celebration ends on ^ ^ and blended two faces back into Idle)
+        const seq = [() => k.correct(), () => k.wrong(), () => k.hard(), () => k.combo(3)];
         seq[taps.current++ % seq.length]();
     };
     return (
         <motion.div
             className="kips-live"
             data-interactive={interactive || undefined}
-            onViewportEnter={() => { inView.current = true; if (quiet) return; window.setTimeout(() => (waiting ? kips.current?.fidget(2) : celebrate ? kips.current?.sessionComplete(true) : kips.current?.correct()), 400); }}
+            onViewportEnter={() => { inView.current = true; if (quiet) return; window.setTimeout(() => (waiting ? kips.current?.beckon() : celebrate ? kips.current?.sessionComplete(true) : kips.current?.correct()), 400); }}
             onViewportLeave={() => { inView.current = false; }}
             viewport={{ amount: 0.6, once: !waiting }}
             onClick={interactive ? poke : undefined}

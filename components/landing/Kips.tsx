@@ -18,6 +18,8 @@ export type KipsHandle = {
     premium: () => void;
     /** One of the idle fidgets by index (1 look around, 2 check the time, 3 foot tap, 4 look up, 5 sigh, 6 peek, 7 trunk twirl, 8 yawn). */
     fidget: (index: number) => void;
+    /** The closing's invitation: a look down at the download button, then a wave. */
+    beckon: () => void;
 };
 
 type KipsProps = {
@@ -102,6 +104,7 @@ export const Kips = forwardRef<KipsHandle, KipsProps>(function Kips(
             combo: (tier) => fire('comboReached', () => { const n = rive?.viewModelInstance?.number('comboTier'); if (n) n.value = tier; }),
             sessionComplete: (perfect = false) => fire('sessionCompleted', () => { const b = rive?.viewModelInstance?.boolean('sessionPerfect'); if (b) b.value = perfect; }),
             premium: () => fire('premiumActivated'),
+            beckon: () => fire('beckon'),
             fidget: (index) => fire('fidget', () => { const n = rive?.viewModelInstance?.number('fidgetIndex'); if (n) n.value = index; }),
         }),
         [fire, rive],
