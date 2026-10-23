@@ -46,7 +46,7 @@
 .try .lesson { --stack-w: min(360px, max(250px, calc((100svh - 560px) * 0.68))); }
 .try .lesson--done { min-height: min(700px, calc(100svh - 300px)); }
 .try__inner { display: grid; justify-items: center; text-align: center; }
-.try__title { font-size: clamp(30px, 3.6vw, 42px); }
+.try .try__title { font-size: clamp(30px, 3.6vw, 42px); }
 .try__hint { margin-top: 8px; color: var(--secondary); font-size: 16px; font-weight: 600; }
 .try .hero__demo { margin-top: 28px; }
 
@@ -72,8 +72,12 @@
 
 .ls-stage { position: relative; display: grid; place-items: center; }
 .ls-stack { position: relative; width: min(100%, var(--stack-w, 360px)); aspect-ratio: 0.68; }
-.ls-card { position: absolute; inset: 0; border-radius: 10px; will-change: transform; transform-style: preserve-3d; touch-action: none; }
+.ls-card { position: absolute; inset: 0; border-radius: 10px; will-change: transform; transform-style: preserve-3d; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+/* the back's description scrolls under a vertical touch; the card itself takes horizontal swipes and long presses */
+.ls-card[data-back='true'] { touch-action: pan-y; }
+.ls-card__drag { position: absolute; inset: 0; border-radius: 10px; transform-style: preserve-3d; }
 .ls-card[data-front='true'] { cursor: grab; }
+.ls-card[data-front='true']:active { cursor: grabbing; }
 .ls-card[data-front='false'] { pointer-events: none; }
 .ls-card__hit { position: absolute; inset: 0; margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: center; cursor: inherit; border-radius: 10px; transform-style: preserve-3d; }
 .ls-card__hit:focus-visible { outline: 3px solid rgba(66, 107, 255, 0.8); outline-offset: 4px; }
@@ -97,7 +101,7 @@
 .ls-face__word { font-size: 28px; line-height: 34px; font-weight: 400; padding: 10px; }
 .ls-face__reveal { position: absolute; left: 0; right: 0; bottom: 40px; font-size: 12px; color: var(--ls-ink); opacity: 0.75; animation: reveal-breathe 1.9s ease-in-out 0.46s infinite alternate; }
 @keyframes reveal-breathe { from { opacity: 0.75; } to { opacity: 0.3; } }
-.ls-back__scroll { height: 100%; overflow: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%); scrollbar-width: none; }
+.ls-back__scroll { height: 100%; overflow: auto; overscroll-behavior: contain; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%); scrollbar-width: none; }
 .ls-back__scroll::-webkit-scrollbar { display: none; }
 .ls-back__word { font-size: 28px; line-height: 34px; font-weight: 600; font-style: italic; padding: 20px 0; }
 .ls-back__means { font-size: 15px; font-weight: 500; }
@@ -283,14 +287,15 @@
     .kips-stage .kips { width: min(100%, 320px) !important; height: auto !important; aspect-ratio: 1; }
     .closing__kips .kips { width: min(100%, 260px) !important; height: auto !important; aspect-ratio: 1; }
     /* the lesson chapter fits a phone screen: smaller title, no keyboard hint, the card sized to the viewport */
-    .try { padding: 36px 0 24px; }
-    .try__title { font-size: 26px; line-height: 1.05; }
+    .try { padding: 20px 0 16px; }
+    .try .try__title { font-size: 22px; line-height: 1.15; }
     .try__hint { display: none; }
-    .try .hero__demo { margin-top: 18px; }
-    .try .lesson { --stack-w: min(280px, max(180px, calc((100svh - 385px) * 0.68))); }
+    .try .hero__demo { margin-top: 12px; }
+    /* sized by the phone's width; only a very short screen trims it, and never below 250px */
+    .try .lesson { --stack-w: max(250px, min(80vw, 330px, calc((100lvh - 270px) * 0.68))); }
     .try .ls-hint { display: none; }
-    .try .ls-controls { padding-top: 50px; }
-    .try .ls-kips { left: -10px; bottom: 42px; scale: 0.58; }
+    .try .ls-controls { padding-top: 44px; }
+    .try .ls-kips { left: -10px; bottom: 40px; scale: 0.5; transform-origin: bottom left; }
     .candle { width: 300px; height: 340px; }
     .streak-hero { width: 460px !important; height: 460px !important; translate: -50% calc(-50% - 20px); }
     .hero__kips .kips { width: 300px !important; height: 300px !important; }
